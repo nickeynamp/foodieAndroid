@@ -14,9 +14,62 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
-    <menu>
-        android:
 
-    </menu>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Browse"
+        android:onClick="goToBrowse"
+        android:id="@+id/browseButton"
+        android:layout_marginTop="27dp"
+        android:layout_alignParentStart="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User"
+        android:onClick="goToUser"
+        android:id="@+id/userButton"
+        android:layout_below="@+id/messageButton"
+        android:layout_alignEnd="@+id/messageButton" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Like"
+        android:onClick="goToLike"
+        android:layout_below="@+id/userButton"
+        android:layout_alignStart="@+id/userButton"
+        android:id="@+id/likeButton" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Message"
+        android:onClick="goToMessage"
+        android:id="@+id/messageButton"
+        android:layout_marginTop="14dp"
+        android:layout_below="@+id/browseButton"
+        android:layout_alignEnd="@+id/browseButton" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inbox"
+        android:onClick="goToInbox"
+        tools:ignore="UnknownId"
+        android:id="@+id/inboxButton"
+        android:layout_below="@+id/likeButton"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restaurant"
+        android:onClick="goToRestaurant"
+        tools:ignore="UnknownId"
+        android:id="@+id/restaurantButton"
+        android:layout_marginTop="14dp"
+        android:layout_below="@+id/inboxButton"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

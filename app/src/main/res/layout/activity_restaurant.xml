@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_restaurant"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,12 +9,22 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    tools:context="com.example.nickp.foodieandroid.Restaurant">
+    tools:context="com.example.nickp.foodieandroid.Restaurant"
+    android:background="@color/colorWhite">
+
     <LinearLayout
         android:id="@+id/restaurantLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -31,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:text="Koh Phangan"
                 android:textSize="26dp"
-                 />
+                android:textColor="@color/colorBlack"/>
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -42,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginStart="12dp">
+            android:layout_marginStart="10dp">
             <ImageView
                 android:layout_width="15dp"
                 android:layout_height="15dp"

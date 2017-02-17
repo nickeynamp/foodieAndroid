@@ -1,13 +1,13 @@
 package com.example.nickp.foodieandroid;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Message extends AppCompatActivity {
+public class Message extends ActionBarHandler {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message);
+        super.onCreate(savedInstanceState, R.layout.activity_message);
     }
+
+
 }

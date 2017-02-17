@@ -3,12 +3,11 @@ package com.example.nickp.foodieandroid;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class Inbox extends AppCompatActivity {
+public class Inbox extends ActionBarHandler {
 
     ListView inboxList;
     String[] names = {
@@ -47,8 +46,7 @@ public class Inbox extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inbox);
+        super.onCreate(savedInstanceState, R.layout.activity_inbox);
         final Context inboxContext = this;
         InboxListAdapter adapter = new InboxListAdapter(this, names, previews, times, images);
         inboxList = (ListView) findViewById(R.id.inboxlist);

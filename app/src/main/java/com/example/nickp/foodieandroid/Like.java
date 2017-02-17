@@ -1,13 +1,13 @@
 package com.example.nickp.foodieandroid;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Like extends AppCompatActivity {
+public class Like extends ActionBarHandler {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_like);
+        super.onCreate(savedInstanceState, R.layout.activity_like);
     }
+
+
 }

@@ -2,15 +2,13 @@ package com.example.nickp.foodieandroid;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ActionBarHandler {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState, R.layout.activity_main);
     }
 
     public void goToBrowse(View view) {
@@ -42,4 +40,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, User.class);
         startActivity(intent);
     }
+
 }

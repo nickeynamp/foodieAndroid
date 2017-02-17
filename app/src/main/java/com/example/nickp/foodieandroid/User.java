@@ -1,13 +1,10 @@
 package com.example.nickp.foodieandroid;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class User extends AppCompatActivity {
+public class User extends ActionBarHandler {
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
+        super.onCreate(savedInstanceState, R.layout.activity_user);
     }
 }

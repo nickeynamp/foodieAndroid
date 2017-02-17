@@ -5,22 +5,61 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+            android:name=".MainActivity"
+            android:label="Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Browse" />
-        <activity android:name=".Restaurant" />
-        <activity android:name=".User" />
-        <activity android:name=".Inbox" />
-        <activity android:name=".Message" />
-        <activity android:name=".Like"></activity>
+        <activity
+            android:name=".Browse"
+            android:label="Browse"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+        <activity
+            android:name=".Restaurant"
+            android:label="Restaurant"
+            android:parentActivityName=".Browse">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Browse"/>
+        </activity>
+        <activity android:name=".User"
+            android:label="User"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+        <activity android:name=".Inbox"
+            android:label="Inbox"
+            android:parentActivityName=".User">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".User"/>
+        </activity>
+        <activity android:name=".Message"
+            android:label="Message"
+            android:parentActivityName=".Inbox">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Inbox"/>
+        </activity>
+        <activity android:name=".Like"
+            android:label="Like"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
     </application>
 
 </manifest>

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Foodie</string>
+    <string name="user_send_chat_request">Send chat request</string>
 </resources>

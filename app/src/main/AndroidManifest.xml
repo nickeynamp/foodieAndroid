@@ -32,28 +32,32 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Browse"/>
         </activity>
-        <activity android:name=".User"
+        <activity
+            android:name=".User"
             android:label="User"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>
         </activity>
-        <activity android:name=".Inbox"
+        <activity
+            android:name=".Inbox"
             android:label="Inbox"
             android:parentActivityName=".User">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".User"/>
         </activity>
-        <activity android:name=".Message"
+        <activity
+            android:name=".Message"
             android:label="Message"
             android:parentActivityName=".Inbox">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Inbox"/>
         </activity>
-        <activity android:name=".Like"
+        <activity
+            android:name=".Like"
             android:label="Like"
             android:parentActivityName=".MainActivity">
             <meta-data

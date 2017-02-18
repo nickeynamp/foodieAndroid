@@ -5,84 +5,453 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="0dp"
     tools:context="com.example.nickp.foodieandroid.MainActivity">
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/sidemenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--this is the main content-->
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+
+        <!--this is the drawer-->
+
+    </android.support.v4.widget.DrawerLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!" />
+            android:layout_marginBottom="20px"
+            android:text="@string/hotRightNow"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="120dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/mcdonalds"
+                android:onClick="goToRestaurant">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/mainText"
+                        android:text="McDonald"
+                        android:textColor="@color/info"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:layout_centerInParent="true"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/subtext"
+                            android:layout_gravity="center"
+                            android:text="4"
+                            android:textColor="@color/info"
+                            android:textSize="10dp"
+                            android:textStyle="bold"
+                            android:layout_centerInParent="true"/>
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="10dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/people"/>
+                    </LinearLayout>
+                </LinearLayout>
 
-        <Button
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="120dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/sushiyama"
+                android:onClick="goToRestaurant">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/mainText1"
+                        android:text="Sushi Yama"
+                        android:textColor="@color/info"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:layout_centerInParent="true"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/subtext1"
+                            android:layout_gravity="center"
+                            android:text="7"
+                            android:textColor="@color/info"
+                            android:textSize="10dp"
+                            android:textStyle="bold"
+                            android:layout_centerInParent="true"/>
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="10dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/people"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="120dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/kohphangan"
+                android:onClick="goToRestaurant">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/mainText2"
+                        android:text="Koh Phangan"
+                        android:textColor="@color/info"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:layout_centerInParent="true"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/subtext2"
+                            android:layout_gravity="center"
+                            android:text="10"
+                            android:textColor="@color/info"
+                            android:textSize="10dp"
+                            android:textStyle="bold"
+                            android:layout_centerInParent="true"/>
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="10dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/people"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Browse"
-            android:onClick="goToBrowse"
-            android:id="@+id/browseButton"
-            android:layout_marginTop="27dp"
-            android:layout_alignParentStart="true" />
-
-        <Button
-            android:layout_width="wrap_content"
+            android:text="@string/categories"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:layout_gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="User"
-            android:onClick="goToUser"
-            android:id="@+id/userButton"
-            android:layout_below="@+id/messageButton"
-            android:layout_alignEnd="@+id/messageButton" />
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:orientation="vertical"
+            android:divider="?android:dividerHorizontal"
+            android:showDividers="middle">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="goToBrowse"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Like"
-            android:onClick="goToLike"
-            android:layout_below="@+id/userButton"
-            android:layout_alignStart="@+id/userButton"
-            android:id="@+id/likeButton" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/sushi"
+                            android:id="@+id/imageView" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Message"
-            android:onClick="goToMessage"
-            android:id="@+id/messageButton"
-            android:layout_marginTop="14dp"
-            android:layout_below="@+id/browseButton"
-            android:layout_alignEnd="@+id/browseButton" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="ASIAN"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:textColor="@color/colorBlack"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="goToBrowse"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/spaghetti2"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="ITALIAN"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:textColor="@color/colorBlack"/>
+                    </LinearLayout>
+                </LinearLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Inbox"
-            android:onClick="goToInbox"
-            tools:ignore="UnknownId"
-            android:id="@+id/inboxButton"
-            android:layout_below="@+id/likeButton"
-            android:layout_alignParentStart="true" />
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:choiceMode="singleChoice"
+                    android:divider="@android:color/transparent"
+                    android:dividerHeight="0dp"
+                    android:background="@color/colorGrey">
+                </ListView>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Restaurant"
-            android:onClick="goToRestaurant"
-            tools:ignore="UnknownId"
-            android:id="@+id/restaurantButton"
-            android:layout_marginTop="14dp"
-            android:layout_below="@+id/inboxButton"
-            android:layout_alignParentStart="true" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="goToBrowse"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/fish"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="INDIAN"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:textColor="@color/colorBlack"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="goToBrowse"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/taco"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="MEXICAN"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:textColor="@color/colorBlack"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="goToBrowse"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/olive"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="GREEK"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:textColor="@color/colorBlack"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="goToBrowse"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/baguette"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="FRENCH"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:textColor="@color/colorBlack"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
+    </ScrollView>
+
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="vertical">-->
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+            <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>-->
+
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Browse"-->
+            <!--android:onClick="goToBrowse"-->
+            <!--android:id="@+id/browseButton"-->
+            <!--android:layout_marginTop="27dp"-->
+            <!--android:layout_alignParentStart="true" />-->
+
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="User"-->
+            <!--android:onClick="goToUser"-->
+            <!--android:id="@+id/userButton"-->
+            <!--android:layout_below="@+id/messageButton"-->
+            <!--android:layout_alignEnd="@+id/messageButton" />-->
+
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Like"-->
+            <!--android:onClick="goToLike"-->
+            <!--android:layout_below="@+id/userButton"-->
+            <!--android:layout_alignSteight="60dp"--Button"-->
+            <!--android:id="@+id/likeButton" />-->
+
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Message"-->
+            <!--android:onClick="goToMessage"-->
+            <!--android:id="@+id/messageButton"-->
+            <!--android:layout_marginTop="14dp"-->
+            <!--android:layout_below="@+id/browseButton"-->
+            <!--android:layout_alignEnd="@+id/browseButton" />-->
+
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Inbox"-->
+            <!--android:onClick="goToInbox"-->
+            <!--tools:ignore="UnknownId"-->
+            <!--android:id="@+id/inboxButton"-->
+            <!--android:layout_below="@+id/likeButton"-->
+            <!--android:layout_alignParentStart="true" />-->
+
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Restaurant"-->
+            <!--android:onClick="goToRestaurant"-->
+            <!--tools:ignore="UnknownId"-->
+            <!--android:id="@+id/restaurantButton"-->
+            <!--android:layout_marginTop="14dp"-->
+            <!--android:layout_below="@+id/inboxButton"-->
+            <!--android:layout_alignParentStart="true" />-->
+    <!--</LinearLayout>-->
 
 </RelativeLayout>

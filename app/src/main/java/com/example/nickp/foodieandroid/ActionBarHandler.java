@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import static com.example.nickp.foodieandroid.MainActivity.jToggle;
 
 /**
  ** Created by philippe on 2017-02-17.
@@ -14,14 +16,14 @@ import android.view.MenuItem;
 
 class ActionBarHandler extends AppCompatActivity {
 
+    private static final String TAG = ActionBarHandler.class.getSimpleName();;
+
     protected void onCreate(Bundle savedInstanceState, int contentView) {
         super.onCreate(savedInstanceState);
         setContentView(contentView);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null)
-            actionBar.setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.sidemenu);
     }
 
 
@@ -35,6 +37,10 @@ class ActionBarHandler extends AppCompatActivity {
     // Handle action bar activities
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (jToggle.onOptionsItemSelected(item)) {
+            Log.d(TAG, "it gets here");
+            return true;
+        }
         switch (item.getItemId()) {
             case R.id.action_user:
                 Intent userIntent = new Intent(this, User.class);
@@ -51,6 +57,7 @@ class ActionBarHandler extends AppCompatActivity {
                 startActivity(likeIntent);
                 return true;
 
+
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
@@ -58,4 +65,5 @@ class ActionBarHandler extends AppCompatActivity {
 
         }
     }
+
 }

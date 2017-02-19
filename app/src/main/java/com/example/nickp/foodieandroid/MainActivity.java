@@ -1,32 +1,102 @@
 package com.example.nickp.foodieandroid;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.content.res.Configuration;
+import android.view.MenuItem;
 
 public class MainActivity extends ActionBarHandler {
-
     private DrawerLayout jDrawer;
     private ListView jList;
     private String[] items;
+    public static ActionBarDrawerToggle jToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_main);
         jDrawer = (DrawerLayout) findViewById(R.id.drawer);
-        //jList = (ListView) findViewById(R.id.navItems);
+        jList = (ListView) findViewById(R.id.navItems);
+        items = getResources().getStringArray(R.array.navItems);
 
         //set shadow to mask main content when drawer opens if there exist PNGs to mask
         //jDrawer.setDrawerShadow(R.drawable.dr);
 
         //set the adapter for the list view
-        //jList.setAdapter(new ArrayAdapter<String>(this,R.layout.drawer_list_item, items));
+        ArrayAdapter<String> adapter =new ArrayAdapter<String>(this,R.layout.drawer_list_item,items);
+        jList.setAdapter(adapter);
 
         //set the list click's listener
-        //jList.setOnItemClickListener(new DrawerItemClickListener());
+        jList.setOnItemClickListener(new DrawerItemClickListener());
+
+        jToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                jDrawer,         /* DrawerLayout object */
+                R.string.drawer_open,  /* "open drawer" description */
+                R.string.drawer_close  /* "close drawer" description */
+        ) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+        };
+
+        // Set the drawer toggle as the DrawerListener
+        jDrawer.addDrawerListener(jToggle);
+
     }
+
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent,View view, int position, long id){
+            jumpToPage(view, position);
+        }
+    }
+
+    private void jumpToPage(View view, int position){
+
+        //Using Intent to open New Activity
+        switch (position){
+            case 1:
+                goToBrowse(view);
+                break;
+            case 2:
+                goToInbox(view);
+                break;
+            case 3:
+                goToLike(view);
+                break;
+            case 4:
+                goToMessage(view);
+                break;
+            case 5:
+                goToRestaurant(view);
+                break;
+            case 6:
+                goToUser(view);
+                break;
+            default:
+                System.out.print("ERROR");
+                break;
+        }
+
+        jList.setItemChecked(position, true);
+        getActionBar().setTitle(items[position]);
+        jDrawer.closeDrawer(jList);
+    }
+
 
     public void goToBrowse(View view) {
         Intent intent = new Intent(this, Browse.class);
@@ -58,4 +128,33 @@ public class MainActivity extends ActionBarHandler {
         startActivity(intent);
     }
 
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        jToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        jToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (jToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        // Handle your other action bar items...
+
+            return super.onOptionsItemSelected(item);
+        }
+
+
 }
+
+

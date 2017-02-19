@@ -3,4 +3,14 @@
     <string name="user_send_chat_request">Send chat request</string>
     <string name="hotRightNow"><u>Hot Right Now</u></string>
     <string name="categories"><u>Categories</u></string>
+    <string-array name="navItems">
+        <item>Browse</item>
+        <item>Inbox</item>
+        <item>Like</item>
+        <item>Message</item>
+        <item>Restaurant</item>
+        <item>User</item>
+    </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 </resources>

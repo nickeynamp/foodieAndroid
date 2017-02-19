@@ -38,7 +38,6 @@ class ActionBarHandler extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (jToggle.onOptionsItemSelected(item)) {
-            Log.d(TAG, "it gets here");
             return true;
         }
         switch (item.getItemId()) {

@@ -25,9 +25,6 @@ public class MainActivity extends ActionBarHandler {
         jList = (ListView) findViewById(R.id.navItems);
         items = getResources().getStringArray(R.array.navItems);
 
-        //set shadow to mask main content when drawer opens if there exist PNGs to mask
-        //jDrawer.setDrawerShadow(R.drawable.dr);
-
         //set the adapter for the list view
         ArrayAdapter<String> adapter =new ArrayAdapter<String>(this,R.layout.drawer_list_item,items);
         jList.setAdapter(adapter);

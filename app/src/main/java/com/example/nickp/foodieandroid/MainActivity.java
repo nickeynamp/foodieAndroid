@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,7 +17,7 @@ public class MainActivity extends ActionBarHandler {
     private DrawerLayout jDrawer;
     private ListView jList;
     private String[] items;
-    public static ActionBarDrawerToggle jToggle;
+    public ActionBarDrawerToggle jToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,6 @@ public class MainActivity extends ActionBarHandler {
 
         // Set the drawer toggle as the DrawerListener
         jDrawer.addDrawerListener(jToggle);
-
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -66,22 +66,22 @@ public class MainActivity extends ActionBarHandler {
 
         //Using Intent to open New Activity
         switch (position){
-            case 1:
+            case 0:
                 goToBrowse(view);
                 break;
-            case 2:
+            case 1:
                 goToInbox(view);
                 break;
-            case 3:
+            case 2:
                 goToLike(view);
                 break;
-            case 4:
+            case 3:
                 goToMessage(view);
                 break;
-            case 5:
+            case 4:
                 goToRestaurant(view);
                 break;
-            case 6:
+            case 5:
                 goToUser(view);
                 break;
             default:
@@ -90,7 +90,6 @@ public class MainActivity extends ActionBarHandler {
         }
 
         jList.setItemChecked(position, true);
-        getActionBar().setTitle(items[position]);
         jDrawer.closeDrawer(jList);
     }
 

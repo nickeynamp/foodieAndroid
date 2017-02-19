@@ -8,7 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import static com.example.nickp.foodieandroid.MainActivity.jToggle;
 
 /**
  ** Created by philippe on 2017-02-17.
@@ -16,14 +15,14 @@ import static com.example.nickp.foodieandroid.MainActivity.jToggle;
 
 class ActionBarHandler extends AppCompatActivity {
 
-    private static final String TAG = ActionBarHandler.class.getSimpleName();;
 
     protected void onCreate(Bundle savedInstanceState, int contentView) {
         super.onCreate(savedInstanceState);
         setContentView(contentView);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setIcon(R.drawable.sidemenu);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
 
@@ -37,9 +36,6 @@ class ActionBarHandler extends AppCompatActivity {
     // Handle action bar activities
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (jToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
         switch (item.getItemId()) {
             case R.id.action_user:
                 Intent userIntent = new Intent(this, User.class);

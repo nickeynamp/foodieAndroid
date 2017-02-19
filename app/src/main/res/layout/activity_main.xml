@@ -454,8 +454,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
-        android:divider="@color/colorPrimaryDark"
-        android:dividerHeight="2dp"
+        android:divider="@color/colorWhite"
+        android:dividerHeight="1dp"
         android:background="#111"/>
 
 </android.support.v4.widget.DrawerLayout>

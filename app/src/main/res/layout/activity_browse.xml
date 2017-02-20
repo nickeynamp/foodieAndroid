@@ -28,9 +28,8 @@
             android:id="@+id/avatarImageView"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-
             android:padding="10dp"
-            android:src="@drawable/spaghetti1"
+            android:background="@drawable/spaghetti1"
             android:contentDescription="Profile Avatar"/>
         <TextView
             android:id="@+id/nameTextView"
@@ -109,7 +108,7 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:padding="10dp"
-            android:src="@drawable/spaghetti1"
+            android:background="@drawable/chocopie"
             android:contentDescription="Profile Avatar"/>
         <TextView
             android:layout_width="wrap_content"
@@ -186,7 +185,7 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:padding="10dp"
-            android:src="@drawable/spaghetti1"
+            android:background="@drawable/burger"
             android:contentDescription="Profile Avatar"/>
         <TextView
             android:layout_width="wrap_content"
@@ -263,7 +262,7 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:padding="10dp"
-            android:src="@drawable/spaghetti1"
+            android:background="@drawable/salmon"
             android:contentDescription="Profile Avatar"/>
         <TextView
             android:layout_width="wrap_content"

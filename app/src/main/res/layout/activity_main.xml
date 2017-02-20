@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDark"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
@@ -54,7 +54,7 @@
                     android:layout_height="120dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:background="@drawable/mcdonalds"
+                    android:id="@+id/mcdonald"
                     android:onClick="goToRestaurant">
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -66,9 +66,10 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/mainText"
                             android:text="McDonald"
+                            android:fontFamily=""
                             android:textColor="@color/info"
                             android:textStyle="bold"
-                            android:textSize="15sp"
+                            android:textSize="17sp"
                             android:layout_centerInParent="true"/>
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -100,7 +101,7 @@
                     android:layout_height="120dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:background="@drawable/sushiyama"
+                    android:id="@+id/sushiyama"
                     android:onClick="goToRestaurant">
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -114,7 +115,7 @@
                             android:text="Sushi Yama"
                             android:textColor="@color/info"
                             android:textStyle="bold"
-                            android:textSize="15sp"
+                            android:textSize="17sp"
                             android:layout_centerInParent="true"/>
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -145,7 +146,7 @@
                     android:layout_height="120dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:background="@drawable/kohphangan"
+                    android:id="@+id/kohphangan"
                     android:onClick="goToRestaurant">
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -159,7 +160,7 @@
                             android:text="Koh Phangan"
                             android:textColor="@color/info"
                             android:textStyle="bold"
-                            android:textSize="15sp"
+                            android:textSize="17sp"
                             android:layout_centerInParent="true"/>
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -221,8 +222,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:background="@drawable/sushi"
-                                android:id="@+id/imageView" />
+                                android:background="@drawable/sushi" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -372,90 +372,17 @@
 
         </LinearLayout>
         </ScrollView>
-
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:orientation="vertical">-->
-            <!--<android.support.v7.widget.Toolbar-->
-                <!--android:id="@+id/toolbar"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="60dp"-->
-                <!--android:background="@color/colorPrimary"-->
-                <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
-                <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>-->
-
-            <!--<Button-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Browse"-->
-                <!--android:onClick="goToBrowse"-->
-                <!--android:id="@+id/browseButton"-->
-                <!--android:layout_marginTop="27dp"-->
-                <!--android:layout_alignParentStart="true" />-->
-
-            <!--<Button-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="User"-->
-                <!--android:onClick="goToUser"-->
-                <!--android:id="@+id/userButton"-->
-                <!--android:layout_below="@+id/messageButton"-->
-                <!--android:layout_alignEnd="@+id/messageButton" />-->
-
-            <!--<Button-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Like"-->
-                <!--android:onClick="goToLike"-->
-                <!--android:layout_below="@+id/userButton"-->
-                <!--android:layout_alignSteight="60dp"-Button"-->
-                <!--android:id="@+id/likeButton" />-->
-
-            <!--<Button-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Message"-->
-                <!--android:onClick="goToMessage"-->
-                <!--android:id="@+id/messageButton"-->
-                <!--android:layout_marginTop="14dp"-->
-                <!--android:layout_below="@+id/browseButton"-->
-                <!--android:layout_alignEnd="@+id/browseButton" />-->
-
-            <!--<Button-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Inbox"-->
-                <!--android:onClick="goToInbox"-->
-                <!--tools:ignore="UnknownId"-->
-                <!--android:id="@+id/inboxButton"-->
-                <!--android:layout_below="@+id/likeButton"-->
-                <!--android:layout_alignParentStart="true" />-->
-
-            <!--<Button-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Restaurant"-->
-                <!--android:onClick="goToRestaurant"-->
-                <!--tools:ignore="UnknownId"-->
-                <!--android:id="@+id/restaurantButton"-->
-                <!--android:layout_marginTop="14dp"-->
-                <!--android:layout_below="@+id/inboxButton"-->
-                <!--android:layout_alignParentStart="true" />-->
-        <!--</LinearLayout>-->
-
     </RelativeLayout>
 
     <!--this is the drawer-->
     <ListView
         android:id="@+id/navItems"
-        android:layout_width="240dp"
+        android:layout_width="170dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
-        android:divider="@color/colorWhite"
+        android:divider="@color/info"
         android:dividerHeight="1dp"
-        android:background="#111"/>
+        android:background="#fdfffc"/>
 
 </android.support.v4.widget.DrawerLayout>

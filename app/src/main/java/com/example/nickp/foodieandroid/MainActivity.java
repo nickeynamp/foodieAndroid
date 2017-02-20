@@ -1,23 +1,39 @@
 package com.example.nickp.foodieandroid;
 
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.support.v8.renderscript.Allocation;
+import android.support.v8.renderscript.Element;
+import android.support.v8.renderscript.RenderScript;
+import android.support.v8.renderscript.ScriptIntrinsicBlur;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.content.res.Configuration;
 import android.view.MenuItem;
+import android.widget.RelativeLayout;
+
+import static android.app.PendingIntent.getActivity;
 
 public class MainActivity extends ActionBarHandler {
     private DrawerLayout jDrawer;
     private ListView jList;
     private String[] items;
     public ActionBarDrawerToggle jToggle;
+    private static final float BLUR_RADIUS = 25f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +41,23 @@ public class MainActivity extends ActionBarHandler {
         jDrawer = (DrawerLayout) findViewById(R.id.drawer);
         jList = (ListView) findViewById(R.id.navItems);
         items = getResources().getStringArray(R.array.navItems);
+
+        RelativeLayout mcdonald = (RelativeLayout) findViewById(R.id.mcdonald);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mcdonalds);
+        Bitmap blurredBitmap = blur(bitmap);
+        Drawable mc = new BitmapDrawable(getResources(),blurredBitmap);
+        mcdonald.setBackground(mc);
+
+        RelativeLayout sushiYama = (RelativeLayout) findViewById(R.id.sushiyama);
+        Bitmap blurredSushi = blur(BitmapFactory.decodeResource(getResources(), R.drawable.sushiyama));
+        Drawable sushi = new BitmapDrawable(getResources(),blurredSushi);
+        sushiYama.setBackground(sushi);
+
+        RelativeLayout kohphangan = (RelativeLayout) findViewById(R.id.kohphangan);
+        Bitmap blurredKoh = blur(BitmapFactory.decodeResource(getResources(), R.drawable.kohphangan));
+        Drawable koh = new BitmapDrawable(getResources(),blurredKoh);
+        kohphangan.setBackground(koh);
+
 
         //set the adapter for the list view
         ArrayAdapter<String> adapter =new ArrayAdapter<String>(this,R.layout.drawer_list_item,items);
@@ -93,6 +126,22 @@ public class MainActivity extends ActionBarHandler {
         jDrawer.closeDrawer(jList);
     }
 
+    public Bitmap blur(Bitmap image) {
+        if (null == image) return null;
+
+        Bitmap outputBitmap = Bitmap.createBitmap(image);
+        final RenderScript renderScript = RenderScript.create(this);
+        Allocation tmpIn = Allocation.createFromBitmap(renderScript, image);
+        Allocation tmpOut = Allocation.createFromBitmap(renderScript, outputBitmap);
+
+        //Intrinsic Gausian blur filter
+        ScriptIntrinsicBlur theIntrinsic = ScriptIntrinsicBlur.create(renderScript, Element.U8_4(renderScript));
+        theIntrinsic.setRadius(BLUR_RADIUS);
+        theIntrinsic.setInput(tmpIn);
+        theIntrinsic.forEach(tmpOut);
+        tmpOut.copyTo(outputBitmap);
+        return outputBitmap;
+    }
 
     public void goToBrowse(View view) {
         Intent intent = new Intent(this, Browse.class);

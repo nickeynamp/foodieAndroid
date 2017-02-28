@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -26,6 +27,19 @@ import android.content.res.Configuration;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.yelp.clientlib.connection.YelpAPI;
+import com.yelp.clientlib.connection.YelpAPIFactory;
+import com.yelp.clientlib.entities.SearchResponse;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+
 import static android.app.PendingIntent.getActivity;
 
 public class MainActivity extends ActionBarHandler {
@@ -34,6 +48,11 @@ public class MainActivity extends ActionBarHandler {
     private String[] items;
     public ActionBarDrawerToggle jToggle;
     private static final float BLUR_RADIUS = 25f;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,22 +64,21 @@ public class MainActivity extends ActionBarHandler {
         RelativeLayout mcdonald = (RelativeLayout) findViewById(R.id.mcdonald);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mcdonalds);
         Bitmap blurredBitmap = blur(bitmap);
-        Drawable mc = new BitmapDrawable(getResources(),blurredBitmap);
+        Drawable mc = new BitmapDrawable(getResources(), blurredBitmap);
         mcdonald.setBackground(mc);
 
         RelativeLayout sushiYama = (RelativeLayout) findViewById(R.id.sushiyama);
         Bitmap blurredSushi = blur(BitmapFactory.decodeResource(getResources(), R.drawable.sushiyama));
-        Drawable sushi = new BitmapDrawable(getResources(),blurredSushi);
+        Drawable sushi = new BitmapDrawable(getResources(), blurredSushi);
         sushiYama.setBackground(sushi);
 
         RelativeLayout kohphangan = (RelativeLayout) findViewById(R.id.kohphangan);
         Bitmap blurredKoh = blur(BitmapFactory.decodeResource(getResources(), R.drawable.kohphangan));
-        Drawable koh = new BitmapDrawable(getResources(),blurredKoh);
+        Drawable koh = new BitmapDrawable(getResources(), blurredKoh);
         kohphangan.setBackground(koh);
 
-
         //set the adapter for the list view
-        ArrayAdapter<String> adapter =new ArrayAdapter<String>(this,R.layout.drawer_list_item,items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.drawer_list_item, items);
         jList.setAdapter(adapter);
 
         //set the list click's listener
@@ -73,12 +91,16 @@ public class MainActivity extends ActionBarHandler {
                 R.string.drawer_close  /* "close drawer" description */
         ) {
 
-            /** Called when a drawer has settled in a completely closed state. */
+            /**
+             * Called when a drawer has settled in a completely closed state.
+             */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
             }
 
-            /** Called when a drawer has settled in a completely open state. */
+            /**
+             * Called when a drawer has settled in a completely open state.
+             */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
             }
@@ -86,19 +108,40 @@ public class MainActivity extends ActionBarHandler {
 
         // Set the drawer toggle as the DrawerListener
         jDrawer.addDrawerListener(jToggle);
+
+        String consumerKey = "GJ-umafNqxKu9X-K4cHegQ";
+        String consumerSecret= "eiEYoX8jLtVKw9YWVwvjZh5yZFY";
+        String token = "_UmTInI7l2LFCHUFQGvxCJkD2wIAIhQ7";
+        String tokenSecret = "hB4pOCztyqEkjK5ivJRuNbAHJDY";
+
+        YelpAPIFactory apiFactory = new YelpAPIFactory(consumerKey, consumerSecret, token, tokenSecret);
+        YelpAPI yelpAPI = apiFactory.createAPI();
+
+        Map<String, String> params = new HashMap<>();
+
+        // general params
+        params.put("term", "Asian");
+        params.put("limit", "3");
+        params.put("sort","2");
+
+
+        Call<SearchResponse> call = yelpAPI.search("Stockholm", params);
+
+
     }
+
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
-        public void onItemClick(AdapterView<?> parent,View view, int position, long id){
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             jumpToPage(view, position);
         }
     }
 
-    private void jumpToPage(View view, int position){
+    private void jumpToPage(View view, int position) {
 
         //Using Intent to open New Activity
-        switch (position){
+        switch (position) {
             case 0:
                 goToBrowse(view);
                 break;
@@ -196,8 +239,8 @@ public class MainActivity extends ActionBarHandler {
         }
         // Handle your other action bar items...
 
-            return super.onOptionsItemSelected(item);
-        }
+        return super.onOptionsItemSelected(item);
+    }
 
 
 }

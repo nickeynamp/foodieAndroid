@@ -1,6 +1,7 @@
 package com.example.nickp.foodieandroid;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -9,10 +10,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class Restaurant extends ActionBarHandler implements OnMapReadyCallback {
+public class Restaurant extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.activity_restaurant);
+        super.onCreate(savedInstanceState);
+/*        super.onCreate(savedInstanceState, R.layout.activity_restaurant);*/
         // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_restaurant);
         // Get the SupportMapFragment and request notification

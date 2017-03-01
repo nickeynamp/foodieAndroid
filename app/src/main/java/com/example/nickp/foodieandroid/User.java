@@ -7,4 +7,6 @@ public class User extends ActionBarHandler {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_user);
     }
+
+
 }

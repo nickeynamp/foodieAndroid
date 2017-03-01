@@ -1,36 +1,29 @@
 package com.example.nickp.foodieandroid;
 
 
-import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.support.v8.renderscript.Allocation;
 import android.support.v8.renderscript.Element;
 import android.support.v8.renderscript.RenderScript;
 import android.support.v8.renderscript.ScriptIntrinsicBlur;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.content.res.Configuration;
-import android.view.MenuItem;
 import android.widget.RelativeLayout;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.FirebaseAuth;
 import com.yelp.clientlib.connection.YelpAPI;
 import com.yelp.clientlib.connection.YelpAPIFactory;
 import com.yelp.clientlib.entities.SearchResponse;
@@ -39,8 +32,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import retrofit2.Call;
-
-import static android.app.PendingIntent.getActivity;
 
 public class MainActivity extends ActionBarHandler {
     private DrawerLayout jDrawer;
@@ -54,8 +45,23 @@ public class MainActivity extends ActionBarHandler {
      */
     private GoogleApiClient client;
 
+    // Choose an arbitrary request code value
+    private static final int RC_SIGN_IN = 555;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() == null) {
+            // not signed in
+            startActivityForResult(
+                    // Get an instance of AuthUI based on the default app
+                    AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setIsSmartLockEnabled(false)
+                            .build(),
+                    RC_SIGN_IN);
+        }
+
         super.onCreate(savedInstanceState, R.layout.activity_main);
         jDrawer = (DrawerLayout) findViewById(R.id.drawer);
         jList = (ListView) findViewById(R.id.navItems);

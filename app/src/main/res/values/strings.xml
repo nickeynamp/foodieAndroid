@@ -11,6 +11,10 @@
         <item>Restaurant</item>
         <item>User</item>
     </string-array>
+    <string name="consumerKey">GJ-umafNqxKu9X-K4cHegQ</string>
+    <string name="consumerSecret">eiEYoX8jLtVKw9YWVwvjZh5yZFY</string>
+    <string name="token">_UmTInI7l2LFCHUFQGvxCJkD2wIAIhQ7</string>
+    <string name="tokenSecret">hB4pOCztyqEkjK5ivJRuNbAHJDY</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 </resources>

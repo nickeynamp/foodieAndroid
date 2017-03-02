@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -34,11 +35,14 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.yelp.clientlib.connection.YelpAPI;
 import com.yelp.clientlib.connection.YelpAPIFactory;
 import com.yelp.clientlib.entities.SearchResponse;
+import com.yelp.clientlib.entities.options.CoordinateOptions;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import retrofit2.Call;
+import retrofit2.Response;
 
 import static android.app.PendingIntent.getActivity;
 
@@ -48,11 +52,10 @@ public class MainActivity extends ActionBarHandler {
     private String[] items;
     public ActionBarDrawerToggle jToggle;
     private static final float BLUR_RADIUS = 25f;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+    YelpAPIFactory apiFactory;
+    YelpAPI yelpAPI;
+    Map<String, String> params;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,24 +112,20 @@ public class MainActivity extends ActionBarHandler {
         // Set the drawer toggle as the DrawerListener
         jDrawer.addDrawerListener(jToggle);
 
-        String consumerKey = "GJ-umafNqxKu9X-K4cHegQ";
-        String consumerSecret= "eiEYoX8jLtVKw9YWVwvjZh5yZFY";
-        String token = "_UmTInI7l2LFCHUFQGvxCJkD2wIAIhQ7";
-        String tokenSecret = "hB4pOCztyqEkjK5ivJRuNbAHJDY";
+        new fetchPictres().execute();
 
-        YelpAPIFactory apiFactory = new YelpAPIFactory(consumerKey, consumerSecret, token, tokenSecret);
-        YelpAPI yelpAPI = apiFactory.createAPI();
-
-        Map<String, String> params = new HashMap<>();
-
-        // general params
-        params.put("term", "Asian");
-        params.put("limit", "3");
-        params.put("sort","2");
+    }
 
 
-        Call<SearchResponse> call = yelpAPI.search("Stockholm", params);
+    @Override
+    public void onStart() {
+        super.onStart();
 
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
 
     }
 
@@ -240,6 +239,40 @@ public class MainActivity extends ActionBarHandler {
         // Handle your other action bar items...
 
         return super.onOptionsItemSelected(item);
+    }
+
+    class fetchPictres extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+            CoordinateOptions coordinate = CoordinateOptions.builder()
+                    .latitude(37.7577)
+                    .longitude(-122.4376).build();
+
+            apiFactory = new YelpAPIFactory(
+                    getString(R.string.consumerKey),
+                    getString(R.string.consumerSecret),
+                    getString(R.string.token),
+                    getString(R.string.tokenSecret));
+            yelpAPI = apiFactory.createAPI();
+            Map<String, String> params = new HashMap<>();
+
+            // general params
+            params.put("term", "Asian");
+            params.put("limit", "3");
+            params.put("sort", "2");
+
+
+
+            Call<SearchResponse> call = yelpAPI.search("Stockholm", params);
+            Response<SearchResponse> response = null;
+            try {
+                response = call.execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 
 

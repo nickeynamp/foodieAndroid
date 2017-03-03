@@ -23,7 +23,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class Restaurant extends ActionBarHandler implements OnMapReadyCallback {
-public class Restaurant extends ActionBarHandler {
     private DatabaseReference mDatabase;
     private UserInfo userInfo;
     private FirebaseUser firebaseUser;
@@ -51,14 +50,6 @@ public class Restaurant extends ActionBarHandler {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        List<String> userList = new ArrayList<>();
-        userList.size();
-        userList.add("Ulrik");
-        userList.add("Ida");
-        userList.add("Falk");
-        RestaurantInfo restaurantInfo = new RestaurantInfo(userList);
-        mDatabase.child("Koh Phangan").setValue(restaurantInfo);
 
     }
 

@@ -5,12 +5,16 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.content.res.Configuration;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,6 +37,9 @@ import java.util.List;
 import java.util.Map;
 
 import jp.wasabeef.picasso.transformations.BlurTransformation;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -49,6 +56,8 @@ public class MainActivity extends ActionBarHandler {
     Map<String, String> params;
     TextView topText1,topText2,topText3,topSub1, topSub2, topSub3;
     ImageView topImage1,topImage2, topImage3;
+    OkHttpClient client;
+    List<RestaurantInfo> restaurants;
 
 
     @Override
@@ -66,6 +75,7 @@ public class MainActivity extends ActionBarHandler {
         topSub1 = (TextView) findViewById(R.id.topSub1);
         topSub2 = (TextView) findViewById(R.id.topSub2);
         topSub3 = (TextView) findViewById(R.id.topSub3);
+        client = new OkHttpClient();
 
 
         Picasso
@@ -120,8 +130,9 @@ public class MainActivity extends ActionBarHandler {
         }
         android.location.Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-        fetchPictures();
-
+        displayRestaurant1(restaurants.get(1));
+        new fetchPictures().execute();
+        displayRestaurant1(restaurants.get(1));
     }
 
 
@@ -232,9 +243,24 @@ public class MainActivity extends ActionBarHandler {
         return super.onOptionsItemSelected(item);
     }
 
-    public void fetchPictures(){
-        List<RestElem> restaurants;
+    public void displayRestaurant1(RestaurantInfo r){
+        Log.v("MESSAGE",r.getPicUrl());
+        Picasso
+                .with(this)
+                .load(r.getPicUrl())
+                .transform(new BlurTransformation(this))
+                .into(topImage1);
+        topText1.setText(r.getName());
+        topSub1.setText(r.getEaters());
+    }
 
+    class fetchPictures extends AsyncTask<String,RestaurantInfo,String> {
+
+        protected void onProgressUpdate(RestaurantInfo... values){
+            super.onProgressUpdate(values);
+        }
+        @Override
+        protected String doInBackground(String... strings) {
             CoordinateOptions coordinate = CoordinateOptions.builder()
                     .latitude(37.7577)
                     .longitude(-122.4376).build();
@@ -248,9 +274,9 @@ public class MainActivity extends ActionBarHandler {
             params = new HashMap<>();
 
             // general params
-            params.put("term", "Asian");
             params.put("limit", "3");
             params.put("sort", "2");
+            params.put("radius_filter", "500");
 
             Call<SearchResponse> call = yelpAPI.search("Stockholm", params);
             Response<SearchResponse> response = null;
@@ -260,17 +286,43 @@ public class MainActivity extends ActionBarHandler {
                 e.printStackTrace();
             }
             if(response!=null){
+                Log.v("Business", response.body().businesses().toString());
                 List<Business> businessList = response.body().businesses();
                 restaurants = new ArrayList<>();
-                RestElem r;
+                RestaurantInfo r;
+                int i =0;
                 for(Business b:businessList){
-                    r = new RestElem(b.name(),b.url());
+                    r = new RestaurantInfo(b.name(),b.url());
                     r.setRating(b.rating());
                     r.setType(b.categories().toString());
+                    restaurants.add(r);
+                    loadPicture(r,i);
+                    i++;
 
                 }
             }
+            return null;
+        }
+        private void loadPicture(final RestaurantInfo r, final int pos){
 
+                okhttp3.Request request = new okhttp3.Request.Builder()
+                        .url(r.getPicUrl())
+                        .build();
+
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(okhttp3.Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
+                        String picture = ResParser.getPictureURL(response.body().string());
+                        restaurants.get(pos).setPicUrl(picture);
+                        publishProgress(restaurants.get(pos));
+                    }
+                });
+        }
     }
 
 

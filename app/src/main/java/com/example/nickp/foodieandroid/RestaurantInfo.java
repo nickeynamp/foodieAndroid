@@ -1,5 +1,14 @@
 package com.example.nickp.foodieandroid;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -11,9 +20,12 @@ public class RestaurantInfo {
     private int eaters;
     private String mainUrl;
     private String picUrl;
-    private double rating;
+    private String ratingImg;
     private String type;
     List<String> userList;
+    private double latitude;
+    private double longitude;
+    private String snippet;
 
     public RestaurantInfo(){
 
@@ -62,12 +74,12 @@ public class RestaurantInfo {
         this.picUrl = picUrl;
     }
 
-    public double getRating() {
-        return rating;
+    public String getRatingImg() {
+        return ratingImg;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
+    public void setRatingImg(String ratingImg) {
+        this.ratingImg = ratingImg;
     }
 
     public String getType() {
@@ -78,5 +90,27 @@ public class RestaurantInfo {
         this.type = type;
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
 
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getSnippet() {
+        return snippet;
+    }
+
+    public void setSnippet(String snippet) {
+        this.snippet = snippet;
+    }
 }

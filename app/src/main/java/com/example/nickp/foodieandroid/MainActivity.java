@@ -5,11 +5,9 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.content.res.Configuration;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -39,7 +37,6 @@ import java.util.Map;
 import jp.wasabeef.picasso.transformations.BlurTransformation;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -293,7 +290,7 @@ public class MainActivity extends ActionBarHandler {
                 int i =0;
                 for(Business b:businessList){
                     r = new RestaurantInfo(b.name(),b.url());
-                    r.setRating(b.rating());
+                    r.setRatingImg(b.ratingImgUrl());
                     r.setType(b.categories().toString());
                     restaurants.add(r);
                     loadPicture(r,i);

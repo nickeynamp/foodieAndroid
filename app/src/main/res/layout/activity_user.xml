@@ -26,12 +26,13 @@
         android:layout_marginTop="10dp"
         android:layout_gravity="center"/>
     <TextView
+        android:id="@+id/usernameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:text="Bert"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textStyle="bold"/>
     <TextView
         android:layout_width="300dp"
@@ -43,7 +44,14 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="25dp"
         android:layout_gravity="center"
         android:text="@string/user_send_chat_request"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:text="Sign Out"
+        android:onClick="signOut"/>
 </LinearLayout>

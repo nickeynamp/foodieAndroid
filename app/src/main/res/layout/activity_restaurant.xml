@@ -27,9 +27,9 @@
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
         <ImageView
+            android:id="@+id/restHeaderImgImageView"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:src="@drawable/kohphangan"
             android:layout_gravity="center_horizontal"
             android:background="@color/colorKohPhangan"/>
         <LinearLayout
@@ -39,9 +39,9 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp">
             <TextView
+                android:id="@+id/restTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Koh Phangan"
                 android:textSize="26dp"
                 android:textColor="@color/colorBlack"/>
             <ImageView
@@ -59,25 +59,10 @@
             android:orientation="horizontal"
             android:layout_marginStart="10dp">
             <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@drawable/fullstar"/>
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@drawable/fullstar"/>
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@drawable/fullstar"/>
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@drawable/halfstar"/>
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@drawable/emptystar"/>
+                android:id="@+id/restRatingImgImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -107,11 +92,12 @@
                 android:text="150-299 SEK"/>
         </LinearLayout>
         <TextView
+            android:id="@+id/restSnippetTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="This Thai Island themed joint is unique. The inside takes you into a world totally foreign to the urban jungle of Stockholm. Koh Phangan has created a Thai Island secluded playaround"/>
+            />
      <!--   <ImageView
             android:layout_width="230dp"
             android:layout_height="130dp"
@@ -135,10 +121,11 @@
                 android:layout_height="15dp"
                 android:src="@drawable/people"/>
             <TextView
+                android:id="@+id/restEatersTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:text="25 people would like to go here"/>
+                />
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"

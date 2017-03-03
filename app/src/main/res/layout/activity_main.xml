@@ -54,8 +54,13 @@
                     android:layout_height="120dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:id="@+id/mcdonald"
                     android:onClick="goToRestaurant">
+                    <ImageView
+                        android:id="@+id/topImage1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerInParent="true"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -64,9 +69,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/mainText"
-                            android:text="McDonald"
-                            android:fontFamily=""
+                            android:id="@+id/topText1"
                             android:textColor="@color/info"
                             android:textStyle="bold"
                             android:textSize="17sp"
@@ -78,9 +81,8 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/subtext"
+                                android:id="@+id/topSub1"
                                 android:layout_gravity="center"
-                                android:text="4"
                                 android:textColor="@color/info"
                                 android:textSize="10dp"
                                 android:textStyle="bold"
@@ -101,8 +103,13 @@
                     android:layout_height="120dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:id="@+id/sushiyama"
                     android:onClick="goToRestaurant">
+                    <ImageView
+                        android:id="@+id/topImage2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerInParent="true"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -111,8 +118,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/mainText1"
-                            android:text="Sushi Yama"
+                            android:id="@+id/topText2"
                             android:textColor="@color/info"
                             android:textStyle="bold"
                             android:textSize="17sp"
@@ -124,9 +130,8 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/subtext1"
+                                android:id="@+id/topSub2"
                                 android:layout_gravity="center"
-                                android:text="7"
                                 android:textColor="@color/info"
                                 android:textSize="10dp"
                                 android:textStyle="bold"
@@ -146,8 +151,13 @@
                     android:layout_height="120dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:id="@+id/kohphangan"
                     android:onClick="goToRestaurant">
+                    <ImageView
+                        android:id="@+id/topImage3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerInParent="true"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -156,8 +166,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/mainText2"
-                            android:text="Koh Phangan"
+                            android:id="@+id/topText3"
                             android:textColor="@color/info"
                             android:textStyle="bold"
                             android:textSize="17sp"
@@ -169,9 +178,8 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/subtext2"
+                                android:id="@+id/topSub3"
                                 android:layout_gravity="center"
-                                android:text="10"
                                 android:textColor="@color/info"
                                 android:textSize="10dp"
                                 android:textStyle="bold"

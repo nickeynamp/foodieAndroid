@@ -1,25 +1,25 @@
 package com.example.nickp.foodieandroid;
 
 
-import android.app.Activity;
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
+import android.location.Location;import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.support.v8.renderscript.Allocation;
 import android.support.v8.renderscript.Element;
 import android.support.v8.renderscript.RenderScript;
 import android.support.v8.renderscript.ScriptIntrinsicBlur;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -27,26 +27,28 @@ import android.widget.ListView;
 import android.content.res.Configuration;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.squareup.picasso.Picasso;
 import com.yelp.clientlib.connection.YelpAPI;
 import com.yelp.clientlib.connection.YelpAPIFactory;
+import com.yelp.clientlib.entities.Business;
 import com.yelp.clientlib.entities.SearchResponse;
 import com.yelp.clientlib.entities.options.CoordinateOptions;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import jp.wasabeef.picasso.transformations.BlurTransformation;
 import retrofit2.Call;
 import retrofit2.Response;
 
-import static android.app.PendingIntent.getActivity;
 
 public class MainActivity extends ActionBarHandler {
+    protected static String stage;
     private DrawerLayout jDrawer;
     private ListView jList;
     private String[] items;
@@ -55,6 +57,8 @@ public class MainActivity extends ActionBarHandler {
     YelpAPIFactory apiFactory;
     YelpAPI yelpAPI;
     Map<String, String> params;
+    TextView topText1,topText2,topText3,topSub1, topSub2, topSub3;
+    ImageView topImage1,topImage2, topImage3;
 
 
     @Override
@@ -63,22 +67,23 @@ public class MainActivity extends ActionBarHandler {
         jDrawer = (DrawerLayout) findViewById(R.id.drawer);
         jList = (ListView) findViewById(R.id.navItems);
         items = getResources().getStringArray(R.array.navItems);
+        topImage1 = (ImageView) findViewById(R.id.topImage1);
+        topImage2 = (ImageView) findViewById(R.id.topImage2);
+        topImage3 = (ImageView) findViewById(R.id.topImage3);
+        topText1 = (TextView) findViewById(R.id.topText1);
+        topText2 = (TextView) findViewById(R.id.topText2);
+        topText3 = (TextView) findViewById(R.id.topText3);
+        topSub1 = (TextView) findViewById(R.id.topSub1);
+        topSub2 = (TextView) findViewById(R.id.topSub2);
+        topSub3 = (TextView) findViewById(R.id.topSub3);
 
-        RelativeLayout mcdonald = (RelativeLayout) findViewById(R.id.mcdonald);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mcdonalds);
-        Bitmap blurredBitmap = blur(bitmap);
-        Drawable mc = new BitmapDrawable(getResources(), blurredBitmap);
-        mcdonald.setBackground(mc);
 
-        RelativeLayout sushiYama = (RelativeLayout) findViewById(R.id.sushiyama);
-        Bitmap blurredSushi = blur(BitmapFactory.decodeResource(getResources(), R.drawable.sushiyama));
-        Drawable sushi = new BitmapDrawable(getResources(), blurredSushi);
-        sushiYama.setBackground(sushi);
+        Picasso
+                .with(this)
+                .load("http://i.imgur.com/DvpvklR.png")
+                .transform(new BlurTransformation(this))
+                .into(topImage1);
 
-        RelativeLayout kohphangan = (RelativeLayout) findViewById(R.id.kohphangan);
-        Bitmap blurredKoh = blur(BitmapFactory.decodeResource(getResources(), R.drawable.kohphangan));
-        Drawable koh = new BitmapDrawable(getResources(), blurredKoh);
-        kohphangan.setBackground(koh);
 
         //set the adapter for the list view
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.drawer_list_item, items);
@@ -112,7 +117,20 @@ public class MainActivity extends ActionBarHandler {
         // Set the drawer toggle as the DrawerListener
         jDrawer.addDrawerListener(jToggle);
 
-        new fetchPictres().execute();
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        android.location.Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        fetchPictures();
 
     }
 
@@ -166,23 +184,6 @@ public class MainActivity extends ActionBarHandler {
 
         jList.setItemChecked(position, true);
         jDrawer.closeDrawer(jList);
-    }
-
-    public Bitmap blur(Bitmap image) {
-        if (null == image) return null;
-
-        Bitmap outputBitmap = Bitmap.createBitmap(image);
-        final RenderScript renderScript = RenderScript.create(this);
-        Allocation tmpIn = Allocation.createFromBitmap(renderScript, image);
-        Allocation tmpOut = Allocation.createFromBitmap(renderScript, outputBitmap);
-
-        //Intrinsic Gausian blur filter
-        ScriptIntrinsicBlur theIntrinsic = ScriptIntrinsicBlur.create(renderScript, Element.U8_4(renderScript));
-        theIntrinsic.setRadius(BLUR_RADIUS);
-        theIntrinsic.setInput(tmpIn);
-        theIntrinsic.forEach(tmpOut);
-        tmpOut.copyTo(outputBitmap);
-        return outputBitmap;
     }
 
     public void goToBrowse(View view) {
@@ -241,10 +242,9 @@ public class MainActivity extends ActionBarHandler {
         return super.onOptionsItemSelected(item);
     }
 
-    class fetchPictres extends AsyncTask<String, String, String> {
+    public void fetchPictures(){
+        List<RestElem> restaurants;
 
-        @Override
-        protected String doInBackground(String... strings) {
             CoordinateOptions coordinate = CoordinateOptions.builder()
                     .latitude(37.7577)
                     .longitude(-122.4376).build();
@@ -255,14 +255,12 @@ public class MainActivity extends ActionBarHandler {
                     getString(R.string.token),
                     getString(R.string.tokenSecret));
             yelpAPI = apiFactory.createAPI();
-            Map<String, String> params = new HashMap<>();
+            params = new HashMap<>();
 
             // general params
             params.put("term", "Asian");
             params.put("limit", "3");
             params.put("sort", "2");
-
-
 
             Call<SearchResponse> call = yelpAPI.search("Stockholm", params);
             Response<SearchResponse> response = null;
@@ -271,8 +269,18 @@ public class MainActivity extends ActionBarHandler {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return null;
-        }
+            if(response!=null){
+                List<Business> businessList = response.body().businesses();
+                restaurants = new ArrayList<>();
+                RestElem r;
+                for(Business b:businessList){
+                    r = new RestElem(b.name(),b.url());
+                    r.setRating(b.rating());
+                    r.setType(b.categories().toString());
+
+                }
+            }
+
     }
 
 

@@ -37,6 +37,10 @@ dependencies {
     })
     compile 'com.android.support:support-v4:24.1.1'
     compile 'com.android.support:appcompat-v7:24.1.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
+    compile 'jp.wasabeef:picasso-transformations:2.1.0'
+    compile 'org.jsoup:jsoup:1.10.2'
     compile 'com.yelp.clientlib:yelp-android:3.0.0'
     testCompile 'junit:junit:4.12'
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'

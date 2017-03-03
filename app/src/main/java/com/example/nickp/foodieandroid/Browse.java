@@ -7,9 +7,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import static com.example.nickp.foodieandroid.MainActivity.stage;
+
+
 public class Browse extends ActionBarHandler {
 
     ListView browseList;
+
     String [] names = {
             "Kohphangan",
             "Happy Su",

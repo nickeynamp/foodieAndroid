@@ -18,8 +18,7 @@ public class ResParser {
         Elements images = doc.select("div.photo-box > img");
         int random = (int )(Math.random() * (double)images.size() + 1);
         String url;
-        url = images.get(random).attr("url");
-
+        url = images.get(random).attr("src");
         int i;
         for (i = url.length() - 1; i > 0; i--) {
             if (url.charAt(i) == '/') {

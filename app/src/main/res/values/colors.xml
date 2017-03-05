@@ -8,5 +8,5 @@
     <color name="colorOpacity">#8cb1b1b1</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
-    <color name="info">#641414</color>
+    <color name="info">#FFFFFFFF</color>
 </resources>

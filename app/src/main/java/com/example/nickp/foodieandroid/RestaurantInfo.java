@@ -1,18 +1,40 @@
 package com.example.nickp.foodieandroid;
 
+import com.yelp.clientlib.entities.Location;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by nickp on 2017-03-03.
  */
 
-public class RestaurantInfo {
+public class RestaurantInfo implements Serializable{
     private String name;
     private int eaters;
     private String mainUrl;
     private String picUrl;
     private double rating;
     private String type;
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    private Location location;
+
+    public List<String> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<String> userList) {
+        this.userList = userList;
+    }
+
     List<String> userList;
 
     public RestaurantInfo(){

@@ -60,7 +60,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_alignParentBottom="true"
-                        android:layout_centerInParent="true"/>
+                        android:layout_centerInParent="true"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -70,6 +72,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/topText1"
+                            android:gravity="center"
                             android:textColor="@color/info"
                             android:textStyle="bold"
                             android:textSize="17sp"
@@ -91,7 +94,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="10dp"
                                 android:layout_marginLeft="5dp"
-                                android:background="@drawable/people"/>
+                                android:background="@drawable/people"
+                                android:backgroundTint="@color/colorWhite"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -109,7 +113,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_alignParentBottom="true"
-                        android:layout_centerInParent="true"/>
+                        android:layout_centerInParent="true"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -119,10 +125,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/topText2"
+                            android:gravity="center"
                             android:textColor="@color/info"
                             android:textStyle="bold"
                             android:textSize="17sp"
-                            android:layout_centerInParent="true"/>
+                            android:layout_centerInParent="true" />
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -140,7 +147,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="10dp"
                                 android:layout_marginLeft="5dp"
-                                android:background="@drawable/people"/>
+                                android:background="@drawable/people"
+                                android:backgroundTint="@color/colorWhite"/>
                         </LinearLayout>
                     </LinearLayout>
                 </RelativeLayout>
@@ -157,7 +165,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_alignParentBottom="true"
-                        android:layout_centerInParent="true"/>
+                        android:layout_centerInParent="true"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -167,6 +177,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/topText3"
+                            android:gravity="center"
                             android:textColor="@color/info"
                             android:textStyle="bold"
                             android:textSize="17sp"
@@ -188,7 +199,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="10dp"
                                 android:layout_marginLeft="5dp"
-                                android:background="@drawable/people"/>
+                                android:background="@drawable/people"
+                                android:backgroundTint="@color/colorWhite"/>
                         </LinearLayout>
                     </LinearLayout>
                 </RelativeLayout>
@@ -224,7 +236,8 @@
                             android:clickable="true"
                             android:onClick="goToBrowse"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:id="@+id/catAsian">
 
                             <ImageView
                                 android:layout_width="wrap_content"
@@ -248,7 +261,8 @@
                             android:clickable="true"
                             android:onClick="goToBrowse"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:id="@+id/catItalian">
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -285,7 +299,8 @@
                             android:clickable="true"
                             android:onClick="goToBrowse"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:id="@+id/catIndian">
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -307,7 +322,8 @@
                             android:clickable="true"
                             android:onClick="goToBrowse"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:id="@+id/catMexican">
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -334,7 +350,8 @@
                             android:clickable="true"
                             android:onClick="goToBrowse"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:id="@+id/catGreek">
 
                             <ImageView
                                 android:layout_width="wrap_content"
@@ -358,7 +375,8 @@
                             android:clickable="true"
                             android:onClick="goToBrowse"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:id="@+id/catFrench">
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"

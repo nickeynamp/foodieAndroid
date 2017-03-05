@@ -9,7 +9,6 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
@@ -18,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,6 +29,7 @@ import com.yelp.clientlib.entities.SearchResponse;
 import com.yelp.clientlib.entities.options.CoordinateOptions;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +40,7 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Response;
+
 
 
 public class MainActivity extends ActionBarHandler {
@@ -55,6 +57,7 @@ public class MainActivity extends ActionBarHandler {
     ImageView topImage1,topImage2, topImage3;
     OkHttpClient client;
     List<RestaurantInfo> restaurants;
+    boolean waiting = false;
 
 
     @Override
@@ -73,14 +76,7 @@ public class MainActivity extends ActionBarHandler {
         topSub2 = (TextView) findViewById(R.id.topSub2);
         topSub3 = (TextView) findViewById(R.id.topSub3);
         client = new OkHttpClient();
-
-
-        Picasso
-                .with(this)
-                .load("http://i.imgur.com/DvpvklR.png")
-                .transform(new BlurTransformation(this))
-                .into(topImage1);
-
+        restaurants = new ArrayList<>();
 
         //set the adapter for the list view
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.drawer_list_item, items);
@@ -114,22 +110,22 @@ public class MainActivity extends ActionBarHandler {
         // Set the drawer toggle as the DrawerListener
         jDrawer.addDrawerListener(jToggle);
 
-        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        android.location.Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            // TODO: Consider calling
+//            //    ActivityCompat#requestPermissions
+//            // here to request the missing permissions, and then overriding
+//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//            //                                          int[] grantResults)
+//            // to handle the case where the user grants the permission. See the documentation
+//            // for ActivityCompat#requestPermissions for more details.
+//            return;
+//        }
+//        android.location.Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-        displayRestaurant1(restaurants.get(1));
-        new fetchPictures().execute();
-        displayRestaurant1(restaurants.get(1));
+        new query().execute("0");
+        waitForRestaurant(false);
+        System.out.println("Value here is restaurants" + restaurants);
     }
 
 
@@ -186,6 +182,27 @@ public class MainActivity extends ActionBarHandler {
 
     public void goToBrowse(View view) {
         Intent intent = new Intent(this, Browse.class);
+        switch (view.getId()){
+            case (R.id.catAsian):
+                intent.putExtra("Category", "Asian");
+                break;
+            case (R.id.catItalian):
+                intent.putExtra("Category", "Italian");
+                break;
+            case (R.id.catIndian):
+                intent.putExtra("Category", "Indian");
+                break;
+            case (R.id.catMexican):
+                intent.putExtra("Category", "Mexican");
+                break;
+            case (R.id.catGreek):
+                intent.putExtra("Category", "Greek");
+                break;
+            case (R.id.catFrench):
+                intent.putExtra("Category", "French");
+                break;
+        }
+
         startActivity(intent);
     }
 
@@ -193,7 +210,6 @@ public class MainActivity extends ActionBarHandler {
         Intent intent = new Intent(this, Inbox.class);
         startActivity(intent);
     }
-
     public void goToLike(View view) {
         Intent intent = new Intent(this, Like.class);
         startActivity(intent);
@@ -206,6 +222,18 @@ public class MainActivity extends ActionBarHandler {
 
     public void goToRestaurant(View view) {
         Intent intent = new Intent(this, Restaurant.class);
+        switch (view.getId()){
+            case (R.id.topImage1):
+                intent.putExtra("Restaurant",restaurants.get(0));
+                break;
+            case (R.id.topImage2):
+                intent.putExtra("Restaurant",restaurants.get(1));
+                break;
+            case (R.id.topImage3):
+                intent.putExtra("Restaurant",restaurants.get(2));
+                break;
+        }
+
         startActivity(intent);
     }
 
@@ -241,20 +269,64 @@ public class MainActivity extends ActionBarHandler {
     }
 
     public void displayRestaurant1(RestaurantInfo r){
-        Log.v("MESSAGE",r.getPicUrl());
+                    Picasso
+                            .with(this)
+                            .load(r.getPicUrl())
+                            .transform(new BlurTransformation(this))
+                            .into(topImage1);
+
+                    topText1.setText(r.getName());
+
+    }
+
+    public void displayRestaurant2(RestaurantInfo r){
         Picasso
                 .with(this)
                 .load(r.getPicUrl())
                 .transform(new BlurTransformation(this))
-                .into(topImage1);
-        topText1.setText(r.getName());
-        topSub1.setText(r.getEaters());
+                .into(topImage2);
+
+        topText2.setText(r.getName());
+
     }
 
-    class fetchPictures extends AsyncTask<String,RestaurantInfo,String> {
+    public void displayRestaurant3(RestaurantInfo r){
+        Picasso
+                .with(this)
+                .load(r.getPicUrl())
+                .transform(new BlurTransformation(this))
+                .into(topImage3);
+
+        topText3.setText(r.getName());
+
+    }
+
+    synchronized public void waitForRestaurant(boolean client) {
+        if (client) {
+            if (restaurants.size() >= 3 ) {
+                displayRestaurant1(restaurants.get(0));
+                displayRestaurant2(restaurants.get(1));
+                displayRestaurant3(restaurants.get(2));
+            } else {
+                waiting = true;
+            }
+        } else {
+            if (waiting) {
+                waiting = false;
+                displayRestaurant1(restaurants.get(0));
+                displayRestaurant2(restaurants.get(1));
+                displayRestaurant3(restaurants.get(2));
+            }
+        }
+    }
+
+    class query extends AsyncTask<String,RestaurantInfo,String> {
 
         protected void onProgressUpdate(RestaurantInfo... values){
             super.onProgressUpdate(values);
+            displayRestaurant1(restaurants.get(0));
+            displayRestaurant2(restaurants.get(1));
+            displayRestaurant3(restaurants.get(2));
         }
         @Override
         protected String doInBackground(String... strings) {
@@ -283,19 +355,17 @@ public class MainActivity extends ActionBarHandler {
                 e.printStackTrace();
             }
             if(response!=null){
-                Log.v("Business", response.body().businesses().toString());
                 List<Business> businessList = response.body().businesses();
-                restaurants = new ArrayList<>();
                 RestaurantInfo r;
                 int i =0;
                 for(Business b:businessList){
                     r = new RestaurantInfo(b.name(),b.url());
                     r.setRatingImg(b.ratingImgUrl());
                     r.setType(b.categories().toString());
+                    r.setLocation(b.location());
                     restaurants.add(r);
                     loadPicture(r,i);
                     i++;
-
                 }
             }
             return null;
@@ -321,8 +391,6 @@ public class MainActivity extends ActionBarHandler {
                 });
         }
     }
-
-
 }
 
 

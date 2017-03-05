@@ -1,31 +1,41 @@
 package com.example.nickp.foodieandroid;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
+import com.yelp.clientlib.entities.Location;
 
-import java.io.InputStream;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by nickp on 2017-03-03.
  */
 
-public class RestaurantInfo {
+public class RestaurantInfo implements Serializable{
     private String name;
     private int eaters;
     private String mainUrl;
     private String picUrl;
-    private String ratingImg;
+    private double rating;
     private String type;
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    private Location location;
+
+    public List<String> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<String> userList) {
+        this.userList = userList;
+    }
+
     List<String> userList;
-    private double latitude;
-    private double longitude;
-    private String snippet;
 
     public RestaurantInfo(){
 
@@ -74,12 +84,12 @@ public class RestaurantInfo {
         this.picUrl = picUrl;
     }
 
-    public String getRatingImg() {
-        return ratingImg;
+    public double getRating() {
+        return rating;
     }
 
-    public void setRatingImg(String ratingImg) {
-        this.ratingImg = ratingImg;
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 
     public String getType() {
@@ -90,27 +100,5 @@ public class RestaurantInfo {
         this.type = type;
     }
 
-    public double getLatitude() {
-        return latitude;
-    }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    public String getSnippet() {
-        return snippet;
-    }
-
-    public void setSnippet(String snippet) {
-        this.snippet = snippet;
-    }
 }

@@ -14,28 +14,8 @@ public class RestaurantInfo implements Serializable{
     private int eaters;
     private String mainUrl;
     private String picUrl;
-    private double rating;
-    private String type;
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    private Location location;
-
-    public List<String> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<String> userList) {
-        this.userList = userList;
-    }
-
-    List<String> userList;
+    private String ratingURL;
+    private String snippetText;
 
     public RestaurantInfo(){
 
@@ -84,21 +64,40 @@ public class RestaurantInfo implements Serializable{
         this.picUrl = picUrl;
     }
 
-    public double getRating() {
-        return rating;
+    public String getSnippetText() {
+        return snippetText;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
+    public void setSnippetText(String snippetText) {
+        this.snippetText = snippetText;
     }
 
-    public String getType() {
-        return type;
+    public String getRatingURL() {
+        return ratingURL;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setRatingURL(String ratingURL) {
+        this.ratingURL = ratingURL;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    private Location location;
+
+    public List<String> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<String> userList) {
+        this.userList = userList;
+    }
+
+    List<String> userList;
 
 }

@@ -5,10 +5,15 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.content.res.Configuration;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
@@ -20,11 +25,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.yelp.clientlib.connection.YelpAPI;
 import com.yelp.clientlib.connection.YelpAPIFactory;
 import com.yelp.clientlib.entities.Business;
+import com.yelp.clientlib.entities.Coordinate;
 import com.yelp.clientlib.entities.SearchResponse;
 import com.yelp.clientlib.entities.options.CoordinateOptions;
 
@@ -38,12 +45,14 @@ import java.util.Map;
 import jp.wasabeef.picasso.transformations.BlurTransformation;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Response;
 
 
 
 public class MainActivity extends ActionBarHandler {
+    private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 200 ;
     protected static String stage;
     private DrawerLayout jDrawer;
     private ListView jList;
@@ -58,6 +67,8 @@ public class MainActivity extends ActionBarHandler {
     OkHttpClient client;
     List<RestaurantInfo> restaurants;
     boolean waiting = false;
+    CoordinateOptions mCoordinate;
+    private double mLatitude,mLongitude;
 
 
     @Override
@@ -112,20 +123,91 @@ public class MainActivity extends ActionBarHandler {
 
 //        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 //        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            // TODO: Consider calling
-//            //    ActivityCompat#requestPermissions
-//            // here to request the missing permissions, and then overriding
-//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//            //                                          int[] grantResults)
-//            // to handle the case where the user grants the permission. See the documentation
-//            // for ActivityCompat#requestPermissions for more details.
+//            ActivityCompat.requestPermissions(this,
+//                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+//                    MY_PERMISSIONS_REQUEST_FINE_LOCATION);
 //            return;
+//        }else{
+//            initLocation();
+//            waitForRestaurant(false);
 //        }
-//        android.location.Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         new query().execute("0");
         waitForRestaurant(false);
-        System.out.println("Value here is restaurants" + restaurants);
+    }
+
+    public void initLocation() {
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            mLatitude = 59.32;
+            mLongitude = 18.07;
+            new query().execute("0");
+
+        } else {
+            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (location != null) {
+                mLongitude = location.getLongitude();
+                mLatitude = location.getLatitude();
+                new query().execute("0");
+            } else {
+                Toast.makeText(this, "Getting location...", Toast.LENGTH_SHORT).show();
+                Criteria criteria = new Criteria();
+                criteria.setAccuracy(Criteria.ACCURACY_FINE);
+                criteria.setPowerRequirement(Criteria.POWER_HIGH);
+                lm.requestSingleUpdate(criteria, new LocationListener() {
+                    @Override
+                    public void onLocationChanged(Location location) {
+                        mCoordinate = CoordinateOptions.builder()
+                                .latitude(location.getLatitude())
+                                .longitude(location.getLongitude()).build();
+                        new query().execute("0");
+                    }
+
+                    @Override
+                    public void onStatusChanged(String s, int i, Bundle bundle) {
+                        Toast.makeText(MainActivity.this, "GPS needed", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onProviderEnabled(String s) {
+                        Toast.makeText(MainActivity.this, "GPS needed", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onProviderDisabled(String s) {
+                        Toast.makeText(MainActivity.this, "GPS needed", Toast.LENGTH_SHORT).show();
+                    }
+                }, null);
+            }
+        }
+        mCoordinate = CoordinateOptions.builder()
+                .latitude(mLatitude)
+                .longitude(mLongitude).build();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_FINE_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(this, "Setting Stockholm as default location", Toast.LENGTH_SHORT).show();
+                }
+                initLocation();
+                waitForRestaurant(false);
+                return;
+            }
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 
 
@@ -330,10 +412,9 @@ public class MainActivity extends ActionBarHandler {
         }
         @Override
         protected String doInBackground(String... strings) {
-            CoordinateOptions coordinate = CoordinateOptions.builder()
-                    .latitude(37.7577)
-                    .longitude(-122.4376).build();
-
+            mCoordinate = CoordinateOptions.builder()
+                    .latitude(59.32)
+                    .longitude(18.07).build();
             apiFactory = new YelpAPIFactory(
                     getString(R.string.consumerKey),
                     getString(R.string.consumerSecret),
@@ -360,9 +441,9 @@ public class MainActivity extends ActionBarHandler {
                 int i =0;
                 for(Business b:businessList){
                     r = new RestaurantInfo(b.name(),b.url());
-                    r.setRatingImg(b.ratingImgUrl());
-                    r.setType(b.categories().toString());
+                    r.setRatingURL(b.ratingImgUrlLarge());
                     r.setLocation(b.location());
+                    r.setSnippetText(b.snippetText());
                     restaurants.add(r);
                     loadPicture(r,i);
                     i++;

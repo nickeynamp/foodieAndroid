@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import static com.example.nickp.foodieandroid.MainActivity.stage;
+import com.example.nickp.foodieandroid.MainActivity.query;
 
 
 public class Browse extends ActionBarHandler {

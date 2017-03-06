@@ -29,15 +29,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20px"
+                android:layout_marginBottom="20dp"
                 android:text="@string/hotRightNow"
                 android:textColor="@color/colorBlack"
                 android:textStyle="bold"
@@ -47,14 +45,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="120dp"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:onClick="goToRestaurant">
+                    android:layout_marginRight="5dp">
                     <ImageView
                         android:id="@+id/topImage1"
                         android:layout_width="match_parent"
@@ -62,7 +60,8 @@
                         android:layout_alignParentBottom="true"
                         android:layout_centerInParent="true"
                         android:adjustViewBounds="true"
-                        android:scaleType="centerCrop"/>
+                        android:scaleType="centerCrop"
+                        android:onClick="goToRestaurant"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -75,8 +74,7 @@
                             android:gravity="center"
                             android:textColor="@color/info"
                             android:textStyle="bold"
-                            android:textSize="17sp"
-                            android:layout_centerInParent="true"/>
+                            android:textSize="17sp" />
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -87,13 +85,12 @@
                                 android:id="@+id/topSub1"
                                 android:layout_gravity="center"
                                 android:textColor="@color/info"
-                                android:textSize="10dp"
-                                android:textStyle="bold"
-                                android:layout_centerInParent="true"/>
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
                             <ImageView
                                 android:layout_width="15dp"
                                 android:layout_height="10dp"
-                                android:layout_marginLeft="5dp"
+                                android:layout_marginStart="5dp"
                                 android:background="@drawable/people"
                                 android:backgroundTint="@color/colorWhite"/>
                         </LinearLayout>
@@ -106,8 +103,7 @@
                     android:layout_weight="1"
                     android:layout_height="120dp"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:onClick="goToRestaurant">
+                    android:layout_marginRight="5dp">
                     <ImageView
                         android:id="@+id/topImage2"
                         android:layout_width="match_parent"
@@ -115,7 +111,8 @@
                         android:layout_alignParentBottom="true"
                         android:layout_centerInParent="true"
                         android:adjustViewBounds="true"
-                        android:scaleType="centerCrop"/>
+                        android:scaleType="centerCrop"
+                        android:onClick="goToRestaurant"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -128,8 +125,7 @@
                             android:gravity="center"
                             android:textColor="@color/info"
                             android:textStyle="bold"
-                            android:textSize="17sp"
-                            android:layout_centerInParent="true" />
+                            android:textSize="17sp" />
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -140,13 +136,12 @@
                                 android:id="@+id/topSub2"
                                 android:layout_gravity="center"
                                 android:textColor="@color/info"
-                                android:textSize="10dp"
-                                android:textStyle="bold"
-                                android:layout_centerInParent="true"/>
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
                             <ImageView
                                 android:layout_width="15dp"
                                 android:layout_height="10dp"
-                                android:layout_marginLeft="5dp"
+                                android:layout_marginStart="5dp"
                                 android:background="@drawable/people"
                                 android:backgroundTint="@color/colorWhite"/>
                         </LinearLayout>
@@ -158,8 +153,7 @@
                     android:layout_weight="1"
                     android:layout_height="120dp"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:onClick="goToRestaurant">
+                    android:layout_marginRight="5dp">
                     <ImageView
                         android:id="@+id/topImage3"
                         android:layout_width="match_parent"
@@ -167,7 +161,8 @@
                         android:layout_alignParentBottom="true"
                         android:layout_centerInParent="true"
                         android:adjustViewBounds="true"
-                        android:scaleType="centerCrop"/>
+                        android:scaleType="centerCrop"
+                        android:onClick="goToRestaurant"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -180,8 +175,7 @@
                             android:gravity="center"
                             android:textColor="@color/info"
                             android:textStyle="bold"
-                            android:textSize="17sp"
-                            android:layout_centerInParent="true"/>
+                            android:textSize="17sp" />
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -192,13 +186,12 @@
                                 android:id="@+id/topSub3"
                                 android:layout_gravity="center"
                                 android:textColor="@color/info"
-                                android:textSize="10dp"
-                                android:textStyle="bold"
-                                android:layout_centerInParent="true"/>
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
                             <ImageView
                                 android:layout_width="15dp"
                                 android:layout_height="10dp"
-                                android:layout_marginLeft="5dp"
+                                android:layout_marginStart="5dp"
                                 android:background="@drawable/people"
                                 android:backgroundTint="@color/colorWhite"/>
                         </LinearLayout>
@@ -224,173 +217,168 @@
                 android:showDividers="middle">
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="goToBrowse"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:id="@+id/catAsian">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/sushi" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="ASIAN"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:textColor="@color/colorBlack"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="goToBrowse"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:id="@+id/catItalian">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/spaghetti2"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="ITALIAN"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:textColor="@color/colorBlack"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ListView
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_gravity="start"
+                    android:choiceMode="singleChoice"
+                    android:divider="@android:color/transparent"
+                    android:dividerHeight="0dp"
+                    android:background="@color/colorGrey">
+                </ListView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center">
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        android:clickable="true"
+                        android:onClick="goToBrowse"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:id="@+id/catIndian">
+                        <ImageView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:onClick="goToBrowse"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:id="@+id/catAsian">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@drawable/sushi" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="ASIAN"
-                                android:textStyle="bold"
-                                android:textSize="20sp"
-                                android:gravity="center"
-                                android:textColor="@color/colorBlack"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/fish"/>
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:onClick="goToBrowse"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:id="@+id/catItalian">
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@drawable/spaghetti2"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="ITALIAN"
-                                android:textStyle="bold"
-                                android:textSize="20sp"
-                                android:textColor="@color/colorBlack"/>
-                        </LinearLayout>
+                            android:layout_gravity="center"
+                            android:text="INDIAN"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:textColor="@color/colorBlack"/>
                     </LinearLayout>
-
-                    <ListView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="start"
-                        android:choiceMode="singleChoice"
-                        android:divider="@android:color/transparent"
-                        android:dividerHeight="0dp"
-                        android:background="@color/colorGrey">
-                    </ListView>
-
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center">
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        android:clickable="true"
+                        android:onClick="goToBrowse"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:id="@+id/catMexican">
+                        <ImageView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:onClick="goToBrowse"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:id="@+id/catIndian">
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@drawable/fish"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="INDIAN"
-                                android:textStyle="bold"
-                                android:textSize="20sp"
-                                android:gravity="center"
-                                android:textColor="@color/colorBlack"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/taco"/>
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:onClick="goToBrowse"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:id="@+id/catMexican">
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@drawable/taco"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="MEXICAN"
-                                android:textStyle="bold"
-                                android:textSize="20sp"
-                                android:textColor="@color/colorBlack"/>
-                        </LinearLayout>
+                            android:layout_gravity="center"
+                            android:text="MEXICAN"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:textColor="@color/colorBlack"/>
                     </LinearLayout>
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center">
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:onClick="goToBrowse"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:id="@+id/catGreek">
+                        android:clickable="true"
+                        android:onClick="goToBrowse"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:id="@+id/catGreek">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@drawable/olive"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="GREEK"
-                                android:textStyle="bold"
-                                android:textSize="20sp"
-                                android:gravity="center"
-                                android:textColor="@color/colorBlack"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <ImageView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:onClick="goToBrowse"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:id="@+id/catFrench">
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@drawable/baguette"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="FRENCH"
-                                android:textStyle="bold"
-                                android:textSize="20sp"
-                                android:textColor="@color/colorBlack"/>
-                        </LinearLayout>
+                            android:layout_gravity="center"
+                            android:background="@drawable/olive"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="GREEK"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:textColor="@color/colorBlack"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="goToBrowse"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:id="@+id/catFrench">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/baguette"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="FRENCH"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:textColor="@color/colorBlack"/>
                     </LinearLayout>
                 </LinearLayout>
 

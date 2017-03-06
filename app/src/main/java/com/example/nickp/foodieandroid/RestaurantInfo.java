@@ -6,16 +6,18 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by nickp on 2017-03-03.
+ ** Created by nickp on 2017-03-03.
  */
 
 public class RestaurantInfo implements Serializable{
+
     private String name;
     private int eaters;
     private String mainUrl;
     private String picUrl;
     private String ratingURL;
     private String snippetText;
+    private Location location;
 
     public RestaurantInfo(){
 
@@ -88,7 +90,7 @@ public class RestaurantInfo implements Serializable{
         this.location = location;
     }
 
-    private Location location;
+
 
     public List<String> getUserList() {
         return userList;

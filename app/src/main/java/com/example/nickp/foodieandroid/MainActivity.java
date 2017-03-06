@@ -304,18 +304,17 @@ public class MainActivity extends ActionBarHandler {
 
     public void goToRestaurant(View view) {
         Intent intent = new Intent(this, Restaurant.class);
-        switch (view.getId()){
+        switch (view.getId()) {
             case (R.id.topImage1):
-                intent.putExtra("Restaurant",restaurants.get(0));
+                intent.putExtra("Restaurant", restaurants.get(0));
                 break;
             case (R.id.topImage2):
-                intent.putExtra("Restaurant",restaurants.get(1));
+                intent.putExtra("Restaurant", restaurants.get(1));
                 break;
             case (R.id.topImage3):
-                intent.putExtra("Restaurant",restaurants.get(2));
+                intent.putExtra("Restaurant", restaurants.get(2));
                 break;
         }
-
         startActivity(intent);
     }
 
@@ -441,6 +440,7 @@ public class MainActivity extends ActionBarHandler {
                 int i =0;
                 for(Business b:businessList){
                     r = new RestaurantInfo(b.name(),b.url());
+                    r.setName(b.name());
                     r.setRatingURL(b.ratingImgUrlLarge());
                     r.setLocation(b.location());
                     r.setSnippetText(b.snippetText());

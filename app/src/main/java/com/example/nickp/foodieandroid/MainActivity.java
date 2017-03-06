@@ -334,7 +334,7 @@ public class MainActivity extends ActionBarHandler {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
+        // Pass the event to ActionBarDrawerToggle, if it returnsb
         // true, then it has handled the app icon touch event
         if (jToggle.onOptionsItemSelected(item)) {
             return true;

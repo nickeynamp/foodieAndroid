@@ -78,7 +78,7 @@ public class Restaurant extends ActionBarHandler implements OnMapReadyCallback {
         // and move the map's camera to the same location.
         Log.e("LONGITUDE", ""+restaurantInfo.getLongitude());
         Log.e("LATITUDE", ""+restaurantInfo.getLatitude());
-        LatLng position = new LatLng(restaurantInfo.getLongitude(), restaurantInfo.getLatitude());
+        LatLng position = new LatLng(restaurantInfo.getLatitude(), restaurantInfo.getLongitude());
         googleMap.addMarker(new MarkerOptions().position(position)
                 .title("Restaurant's Position"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(position));

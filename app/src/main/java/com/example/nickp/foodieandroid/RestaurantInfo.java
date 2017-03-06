@@ -1,6 +1,7 @@
 package com.example.nickp.foodieandroid;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,8 @@ public class RestaurantInfo implements Serializable{
     private String snippetText;
     private double longitude;
     private double latitude;
+    private List<String> userList;
+
 
     public RestaurantInfo(){
 
@@ -25,6 +28,8 @@ public class RestaurantInfo implements Serializable{
     public RestaurantInfo(String name, String mainUrl) {
         this.name = name;
         setMainUrl(mainUrl);
+        userList = new ArrayList<>();
+        userList.add("Lisa");
     }
 
     public void addUser(String user) {
@@ -40,7 +45,7 @@ public class RestaurantInfo implements Serializable{
     }
 
     public int getEaters() {
-        return eaters;
+        return userList.size();
     }
 
     public void setEaters(int eaters) {
@@ -88,8 +93,6 @@ public class RestaurantInfo implements Serializable{
     public void setUserList(List<String> userList) {
         this.userList = userList;
     }
-
-    List<String> userList;
 
     public double getLongitude() {
         return longitude;

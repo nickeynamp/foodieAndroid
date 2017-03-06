@@ -11,8 +11,6 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Inbox extends ActionBarHandler {
-    // Choose an arbitrary request code value
-    private static final int RC_SIGN_IN = 555;
 
     ListView inboxList;
     String[] names = {
@@ -51,17 +49,6 @@ public class Inbox extends ActionBarHandler {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        if (auth.getCurrentUser() == null) {
-            // not signed in
-            startActivityForResult(
-                    // Get an instance of AuthUI based on the default app
-                    AuthUI.getInstance()
-                            .createSignInIntentBuilder()
-                            .setIsSmartLockEnabled(false)
-                            .build(),
-                    RC_SIGN_IN);
-        }
         super.onCreate(savedInstanceState);
         super.setActionBar(R.layout.activity_inbox);
         final Context inboxContext = this;

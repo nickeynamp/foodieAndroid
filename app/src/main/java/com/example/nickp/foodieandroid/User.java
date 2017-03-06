@@ -13,27 +13,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class User extends ActionBarHandler {
-    // Choose an arbitrary request code value
-    private static final int RC_SIGN_IN = 555;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setActionBar(R.layout.activity_user);
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser user = auth.getCurrentUser();
-        if (user == null) {
-            // not signed in
-            startActivityForResult(
-                    // Get an instance of AuthUI based on the default app
-                    AuthUI.getInstance()
-                            .createSignInIntentBuilder()
-                            .setIsSmartLockEnabled(false)
-                            .build(),
-                    RC_SIGN_IN);
-            TextView username = (TextView) findViewById(R.id.usernameTextView);
-            username.setText(auth.getCurrentUser().getDisplayName());
-        }
     }
 
     public void signOut(View v) {

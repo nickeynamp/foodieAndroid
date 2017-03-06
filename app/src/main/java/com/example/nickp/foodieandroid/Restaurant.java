@@ -22,6 +22,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Restaurant extends ActionBarHandler implements OnMapReadyCallback {
     private DatabaseReference mDatabase;
     private UserInfo userInfo;
@@ -38,20 +41,27 @@ public class Restaurant extends ActionBarHandler implements OnMapReadyCallback {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild(restaurantInfo.getName())) {
+                    RestaurantInfo FirebaseRestaurantInfo = dataSnapshot.child(restaurantInfo.getName()).getValue(RestaurantInfo.class);
+                    ((TextView) findViewById(R.id.restEatersTextView)).setText(FirebaseRestaurantInfo.getEaters()+" would like to go here");
+                    ((TextView) findViewById(R.id.restUserListTextView)).setText(FirebaseRestaurantInfo.getUserList().toString());
+                } else {
+                    List<String> list = new ArrayList<>();
+                    list.add("Max");
+                    restaurantInfo.setUserList(list);
+                    mDatabase.child(restaurantInfo.getName()).setValue(restaurantInfo);
+                }
+            }
 
-//        mDatabase.child(restaurantInfo.getName()).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                RestaurantInfo FirebaseRestaurantInfo = dataSnapshot.getValue(RestaurantInfo.class);
-//                ((TextView) findViewById(R.id.restEatersTextView)).setText(FirebaseRestaurantInfo.getEaters()+" would like to go here");
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                System.out.println("Firebase database read failed.\nMessage: "+ databaseError.getMessage());
-//                System.out.println("Details: " + databaseError.getDetails());
-//            }
-//        });
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Firebase database read failed.\nMessage: "+ databaseError.getMessage());
+                System.out.println("Details: " + databaseError.getDetails());
+            }
+        });
 
         if (restaurantInfo != null) {
             ((TextView) findViewById(R.id.restTitleTextView)).setText(restaurantInfo.getName());
@@ -91,12 +101,19 @@ public class Restaurant extends ActionBarHandler implements OnMapReadyCallback {
 
     public void likeRestaurant(View view) {
         if (firebaseUser != null) {
-            mDatabase.child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    UserInfo userInfo = dataSnapshot.getValue(UserInfo.class);
-                    userInfo.addRest("Koh Phangan");
-                    mDatabase.child(firebaseUser.getUid()).setValue(userInfo);
+                    if (dataSnapshot.hasChild(firebaseUser.getUid()) && dataSnapshot.hasChild(restaurantInfo.getName())) {
+                        Log.e("User found", "uid: "+firebaseUser.getUid());
+                        Log.e("Rest found", "uid: "+restaurantInfo.getName());
+                        UserInfo userInfo = dataSnapshot.child(firebaseUser.getUid()).getValue(UserInfo.class);
+                        userInfo.addRest(restaurantInfo.getName());
+                        mDatabase.child(firebaseUser.getUid()).setValue(userInfo);
+                        RestaurantInfo rest = dataSnapshot.child(restaurantInfo.getName()).getValue(RestaurantInfo.class);
+                        rest.addUser(firebaseUser.getDisplayName());
+                        mDatabase.child(restaurantInfo.getName()).setValue(rest);
+                    }
                 }
 
                 @Override

@@ -12,9 +12,11 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +26,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.yelp.clientlib.connection.YelpAPI;
 import com.yelp.clientlib.connection.YelpAPIFactory;
@@ -63,11 +73,59 @@ public class MainActivity extends ActionBarHandler {
     boolean waiting = false;
     CoordinateOptions mCoordinate;
     private double mLatitude,mLongitude;
+    private DatabaseReference mDatabase;
+    private FirebaseAuth auth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    // Choose an arbitrary request code value
+    private static final int RC_SIGN_IN = 555;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setActionBar(R.layout.activity_main);
+        auth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = auth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.e("User", "onAuthStateChanged:signed_in:" + user.getUid());
+                    mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (!dataSnapshot.hasChild(auth.getCurrentUser().getUid())){
+                                Log.e("Hej", "Ny användare: "+auth.getCurrentUser().getDisplayName());
+                                List<String> list = new ArrayList<>();
+                                list.add("Max");
+                                mDatabase.child(auth.getCurrentUser().getUid()).setValue(new UserInfo(list));
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            System.out.println("Firebase database read failed.\nMessage: "+ databaseError.getMessage());
+                            System.out.println("Details: " + databaseError.getDetails());
+                        }
+                    });
+                } else {
+                    // User is signed out
+                    Log.e("User", "onAuthStateChanged:signed_out");
+                }
+            }
+        };
+        auth.addAuthStateListener(mAuthListener);
+        if (auth.getCurrentUser() == null) {
+            // not signed in
+            startActivityForResult(
+                    // Get an instance of AuthUI based on the default app
+                    AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setIsSmartLockEnabled(false)
+                            .build(),
+                    RC_SIGN_IN);
+        }
+
         jDrawer = (DrawerLayout) findViewById(R.id.drawer);
         jList = (ListView) findViewById(R.id.navItems);
         items = getResources().getStringArray(R.array.navItems);
@@ -129,6 +187,28 @@ public class MainActivity extends ActionBarHandler {
 
         new query().execute("0");
         waitForRestaurant(false);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild(restaurants.get(0).getName())) {
+                    RestaurantInfo r0 = dataSnapshot.child(restaurants.get(0).getName()).getValue(RestaurantInfo.class);
+                    RestaurantInfo r1 = dataSnapshot.child(restaurants.get(1).getName()).getValue(RestaurantInfo.class);
+                    RestaurantInfo r2 = dataSnapshot.child(restaurants.get(2).getName()).getValue(RestaurantInfo.class);
+                    topSub1.setText(""+r0.getEaters());
+                    topSub2.setText(""+r1.getEaters());
+                    topSub3.setText(""+r2.getEaters());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Firebase database read failed.\nMessage: "+ databaseError.getMessage());
+                System.out.println("Details: " + databaseError.getDetails());
+            }
+        });
     }
 
     public void initLocation() {
@@ -208,13 +288,13 @@ public class MainActivity extends ActionBarHandler {
     @Override
     public void onStart() {
         super.onStart();
-
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
+        if (mAuthListener != null)
+            auth.removeAuthStateListener(mAuthListener);
     }
 
 
@@ -286,6 +366,7 @@ public class MainActivity extends ActionBarHandler {
         Intent intent = new Intent(this, Inbox.class);
         startActivity(intent);
     }
+
     public void goToLike(View view) {
         Intent intent = new Intent(this, Like.class);
         startActivity(intent);

@@ -10,7 +10,9 @@
         android:layout_height="120dp"
         android:padding="10dp"
         android:src="@drawable/spaghetti1"
-        android:contentDescription="Profile Avatar"/>
+        android:contentDescription="Profile Avatar"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"/>
     <TextView
         android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
@@ -18,6 +20,7 @@
         android:text="Kohphangan"
         android:textAllCaps="true"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:padding="2dp"
@@ -34,16 +37,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="23"
+            android:textStyle="bold"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="4dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/colorGrey"/>
+            android:textColor="@color/colorWhite"/>
         <ImageView
             android:layout_width="20dp"
             android:layout_height="15dp"
             android:src="@drawable/people"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="7.5dp"/>
+            android:layout_marginTop="7.5dp"
+            android:tint="@color/colorWhite"/>
         <ImageView
             android:id="@+id/starsImageView"
             android:layout_width="wrap_content"

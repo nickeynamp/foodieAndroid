@@ -21,9 +21,9 @@ class BrowseListAdapter extends ArrayAdapter<String> {
     private final String[] names;
     private final String[] previews;
     private final String[] stars;
-    private final Integer[] images;
+    private final String[] images;
 
-    BrowseListAdapter(Activity context, String[] names, String[] previews, String[] stars, Integer[] images) {
+    BrowseListAdapter(Activity context, String[] names, String[] previews, String[] stars, String[] images) {
         super(context, R.layout.inbox_item, names);
         this.context = context;
         this.names = names;
@@ -42,17 +42,16 @@ class BrowseListAdapter extends ArrayAdapter<String> {
         ImageView starsImage = (ImageView) rowView.findViewById(R.id.starsImageView);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.avatarImageView);
 
-//        RestaurantInfo currRestaurant = Browse.restaurants.get(position);
         nameText.setText(names[position]);
-        previewText.setText(previews[position]);
+//        previewText.setText(previews[position]);
 
+        Picasso
+                .with(this.context)
+                .load(stars[position])
+                .into(starsImage);
 //        Picasso
 //                .with(this.context)
-//                .load(currRestaurant.getRatingURL())
-//                .into(starsImage);
-//        Picasso
-//                .with(this.context)
-//                .load(currRestaurant.getPicUrl())
+//                .load(images[position])
 //                .into(imageView);
 
         return rowView;

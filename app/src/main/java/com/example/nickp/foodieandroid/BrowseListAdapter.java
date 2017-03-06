@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 /**
  ** Created by philippe on 2017-02-15.
@@ -15,12 +18,12 @@ import android.widget.TextView;
 class BrowseListAdapter extends ArrayAdapter<String> {
 
     private final Activity context;
-    private final String[] names;
-    private final String[] previews;
-    private final String[] stars;
-    private final Integer[] images;
+    private final List<String> names;
+    private final List<String> previews;
+    private final List<String> stars;
+    private final List<String> images;
 
-    BrowseListAdapter(Activity context, String[] names, String[] previews, String[] stars, Integer[] images) {
+    BrowseListAdapter(Activity context, List<String> names, List<String> previews, List<String> stars, List<String> images) {
         super(context, R.layout.inbox_item, names);
         this.context = context;
         this.names = names;
@@ -36,13 +39,21 @@ class BrowseListAdapter extends ArrayAdapter<String> {
 
         TextView nameText = (TextView) rowView.findViewById(R.id.nameTextView);
         TextView previewText = (TextView) rowView.findViewById(R.id.previewTextView);
-        TextView starsText = (TextView) rowView.findViewById(R.id.starsTextView);
+        ImageView starsImage = (ImageView) rowView.findViewById(R.id.starsImageView);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.avatarImageView);
 
-        nameText.setText(names[position]);
-        previewText.setText(previews[position]);
-        starsText.setText(stars[position]);
-        imageView.setImageResource(images[position]);
+        RestaurantInfo currRestaurant = Browse.restaurants.get(position);
+        nameText.setText(names.get(position));
+        previewText.setText(previews.get(position));
+
+        Picasso
+                .with(this.context)
+                .load(currRestaurant.getRatingURL())
+                .into(starsImage);
+        Picasso
+                .with(this.context)
+                .load(currRestaurant.getPicUrl())
+                .into(imageView);
 
         return rowView;
     }

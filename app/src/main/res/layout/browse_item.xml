@@ -44,13 +44,10 @@
             android:src="@drawable/people"
             android:layout_marginStart="5dp"
             android:layout_marginTop="7.5dp"/>
-        <TextView
-            android:id="@+id/starsTextView"
+        <ImageView
+            android:id="@+id/starsImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5 STARS"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/colorWhite"
             android:layout_marginTop="5dp"
             android:layout_marginStart="170dp"/>
     </LinearLayout>

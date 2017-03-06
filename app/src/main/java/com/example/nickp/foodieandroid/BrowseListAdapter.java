@@ -18,12 +18,12 @@ import java.util.List;
 class BrowseListAdapter extends ArrayAdapter<String> {
 
     private final Activity context;
-    private final List<String> names;
-    private final List<String> previews;
-    private final List<String> stars;
-    private final List<String> images;
+    private final String[] names;
+    private final String[] previews;
+    private final String[] stars;
+    private final Integer[] images;
 
-    BrowseListAdapter(Activity context, List<String> names, List<String> previews, List<String> stars, List<String> images) {
+    BrowseListAdapter(Activity context, String[] names, String[] previews, String[] stars, Integer[] images) {
         super(context, R.layout.inbox_item, names);
         this.context = context;
         this.names = names;
@@ -42,18 +42,18 @@ class BrowseListAdapter extends ArrayAdapter<String> {
         ImageView starsImage = (ImageView) rowView.findViewById(R.id.starsImageView);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.avatarImageView);
 
-        RestaurantInfo currRestaurant = Browse.restaurants.get(position);
-        nameText.setText(names.get(position));
-        previewText.setText(previews.get(position));
+//        RestaurantInfo currRestaurant = Browse.restaurants.get(position);
+        nameText.setText(names[position]);
+        previewText.setText(previews[position]);
 
-        Picasso
-                .with(this.context)
-                .load(currRestaurant.getRatingURL())
-                .into(starsImage);
-        Picasso
-                .with(this.context)
-                .load(currRestaurant.getPicUrl())
-                .into(imageView);
+//        Picasso
+//                .with(this.context)
+//                .load(currRestaurant.getRatingURL())
+//                .into(starsImage);
+//        Picasso
+//                .with(this.context)
+//                .load(currRestaurant.getPicUrl())
+//                .into(imageView);
 
         return rowView;
     }

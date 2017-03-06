@@ -82,6 +82,12 @@ public class Browse extends ActionBarHandler {
         });
     }
 
+    public void expand(String[] OrigArray) {
+        String[] newArray = new String[OrigArray.length + 1];
+        System.arraycopy(OrigArray, 0, newArray, 0, OrigArray.length);
+        OrigArray = newArray;
+    }
+
 //    class askYelp extends AsyncTask<String,RestaurantInfo,String>{
 //
 //        protected void onProgressUpdate(RestaurantInfo... values){

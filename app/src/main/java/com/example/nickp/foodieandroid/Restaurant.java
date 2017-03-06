@@ -81,6 +81,7 @@ public class Restaurant extends ActionBarHandler implements OnMapReadyCallback {
         LatLng position = new LatLng(restaurantInfo.getLatitude(), restaurantInfo.getLongitude());
         googleMap.addMarker(new MarkerOptions().position(position)
                 .title("Restaurant's Position"));
+        googleMap.setMinZoomPreference(15);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(position));
     }
 

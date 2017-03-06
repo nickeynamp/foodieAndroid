@@ -22,7 +22,7 @@ public class User extends ActionBarHandler {
         super.setActionBar(R.layout.activity_user);
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
-        if (auth.getCurrentUser() != null) {
+        if (user == null) {
             // not signed in
             startActivityForResult(
                     // Get an instance of AuthUI based on the default app

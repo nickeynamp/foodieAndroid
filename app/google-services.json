@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "395991319335-b4i6por4i0ea3djjofh3ntbijn8fhnpa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nickp.foodieandroid",
+            "certificate_hash": "4c4ef04f2360c10ca72fd870c5bcc44d3e421867"
+          }
+        },
+        {
           "client_id": "395991319335-o8l4r7p7fng7f81ejc3ca2psgoe12km4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

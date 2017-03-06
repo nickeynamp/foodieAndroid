@@ -38,19 +38,23 @@ public class Restaurant extends ActionBarHandler implements OnMapReadyCallback {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        /*restaurantInfo = new RestaurantInfo();
-        restaurantInfo.setName("McDonald's");
-        restaurantInfo.setPicUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Mcdonalds-90s-logo.svg/220px-Mcdonalds-90s-logo.svg.png");
-        restaurantInfo.setRatingURL("http://4.bp.blogspot.com/-ehsTsJRarY0/UcijW6H2gsI/AAAAAAAADDI/8DPg8KJgxfI/s1600/3+Stars.jpg");
-        restaurantInfo.setEaters(8);
-        //restaurantInfo.setLatitude(-33.852);
-        //restaurantInfo.setLongitude(151.211);
-        restaurantInfo.setSnippetText("This Thai Island themed joint is unique. The inside takes you into a world totally foreign to the urban jungle of Stockholm. Koh Phangan has created a Thai Island secluded playaround");
-        */
+
+//        mDatabase.child(restaurantInfo.getName()).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                RestaurantInfo FirebaseRestaurantInfo = dataSnapshot.getValue(RestaurantInfo.class);
+//                ((TextView) findViewById(R.id.restEatersTextView)).setText(FirebaseRestaurantInfo.getEaters()+" would like to go here");
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                System.out.println("Firebase database read failed.\nMessage: "+ databaseError.getMessage());
+//                System.out.println("Details: " + databaseError.getDetails());
+//            }
+//        });
 
         if (restaurantInfo != null) {
             ((TextView) findViewById(R.id.restTitleTextView)).setText(restaurantInfo.getName());
-            ((TextView) findViewById(R.id.restEatersTextView)).setText(restaurantInfo.getEaters()+" would like to go here");
             ((TextView) findViewById(R.id.restSnippetTextView)).setText(restaurantInfo.getSnippetText());
             Picasso
                     .with(this)

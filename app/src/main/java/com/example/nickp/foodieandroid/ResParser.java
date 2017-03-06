@@ -16,7 +16,7 @@ public class ResParser {
     public static String getPictureURL(String html){
         Document doc = Jsoup.parse(html);
         Elements images = doc.select("div.photo-box > img");
-        int random = (int )(Math.random() * (double)images.size() + 1);
+        int random = (int )(Math.random() * (double)images.size() + 1) % (images.size() - 1);
         String url;
         url = images.get(random).attr("src");
         int i;

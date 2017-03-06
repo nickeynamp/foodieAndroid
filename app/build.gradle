@@ -38,11 +38,16 @@ dependencies {
     })
     compile 'com.android.support:support-v4:25.2.0'
     compile 'com.android.support:appcompat-v7:25.2.0'
+
     compile 'com.squareup.picasso:picasso:2.5.2'
+
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
+
     compile 'jp.wasabeef:picasso-transformations:2.1.0'
     compile 'org.jsoup:jsoup:1.10.2'
+
     compile 'com.yelp.clientlib:yelp-android:3.0.0'
+
     compile 'com.google.android.gms:play-services:10.2.0'
     compile 'com.google.firebase:firebase-auth:10.2.0'
     compile 'com.firebaseui:firebase-ui-auth:1.2.0'

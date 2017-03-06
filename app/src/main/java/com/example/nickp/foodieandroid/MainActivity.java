@@ -53,8 +53,8 @@ public class MainActivity extends ActionBarHandler {
     private String[] items;
     public ActionBarDrawerToggle jToggle;
     private static final float BLUR_RADIUS = 25f;
-    YelpAPIFactory apiFactory;
-    YelpAPI yelpAPI;
+    static YelpAPIFactory apiFactory;
+    static YelpAPI yelpAPI;
     Map<String, String> params;
     TextView topText1,topText2,topText3,topSub1, topSub2, topSub3;
     ImageView topImage1,topImage2, topImage3;
@@ -416,13 +416,11 @@ public class MainActivity extends ActionBarHandler {
                     getString(R.string.tokenSecret));
             yelpAPI = apiFactory.createAPI();
             params = new HashMap<>();
-
             // general params
             params.put("limit", "3");
             params.put("sort", "2");
-            params.put("radius_filter", "500");
 
-            Call<SearchResponse> call = yelpAPI.search("Stockholm", params);
+            Call<SearchResponse> call = yelpAPI.search("Kista", params);
             Response<SearchResponse> response = null;
             try {
                 response = call.execute();

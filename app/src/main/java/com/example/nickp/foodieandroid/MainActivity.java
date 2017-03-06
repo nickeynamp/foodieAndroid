@@ -140,7 +140,6 @@ public class MainActivity extends ActionBarHandler {
         topSub3 = (TextView) findViewById(R.id.topSub3);
         client = new OkHttpClient();
         restaurants = new ArrayList<>();
-
         //set the adapter for the list view
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.drawer_list_item, items);
         jList.setAdapter(adapter);
@@ -173,20 +172,9 @@ public class MainActivity extends ActionBarHandler {
         // Set the drawer toggle as the DrawerListener
         jDrawer.addDrawerListener(jToggle);
 
-//        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-//                    MY_PERMISSIONS_REQUEST_FINE_LOCATION);
-//            return;
-//        }else{
-//            initLocation();
-//            waitForRestaurant(false);
-//        }
-//        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
         new query().execute("0");
         waitForRestaurant(false);
+
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -340,22 +328,22 @@ public class MainActivity extends ActionBarHandler {
         Intent intent = new Intent(this, Browse.class);
         switch (view.getId()){
             case (R.id.catAsian):
-                intent.putExtra("Category", "Asian");
+                intent.putExtra("Category", "asianfusion");
                 break;
             case (R.id.catItalian):
-                intent.putExtra("Category", "Italian");
+                intent.putExtra("Category", "italian");
                 break;
             case (R.id.catIndian):
-                intent.putExtra("Category", "Indian");
+                intent.putExtra("Category", "indpak");
                 break;
             case (R.id.catMexican):
-                intent.putExtra("Category", "Mexican");
+                intent.putExtra("Category", "mexican");
                 break;
             case (R.id.catGreek):
-                intent.putExtra("Category", "Greek");
+                intent.putExtra("Category", "greek");
                 break;
             case (R.id.catFrench):
-                intent.putExtra("Category", "French");
+                intent.putExtra("Category", "french");
                 break;
         }
 

@@ -7,6 +7,7 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by nickp on 2017-03-03.
@@ -16,7 +17,10 @@ public class ResParser {
     public static String getPictureURL(String html){
         Document doc = Jsoup.parse(html);
         Elements images = doc.select("div.photo-box > img");
-        int random = (int )(Math.random() * (double)images.size() + 1) % (images.size() - 1);
+//        int random = (int )(Math.random() * (double) + 1) % (images.size() - 1);
+        Random generator = new Random();
+        int random = generator.nextInt(images.size());
+
         String url;
         url = images.get(random).attr("src");
         int i;

@@ -5,24 +5,21 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
-import android.content.res.Configuration;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,12 +28,10 @@ import com.squareup.picasso.Picasso;
 import com.yelp.clientlib.connection.YelpAPI;
 import com.yelp.clientlib.connection.YelpAPIFactory;
 import com.yelp.clientlib.entities.Business;
-import com.yelp.clientlib.entities.Coordinate;
 import com.yelp.clientlib.entities.SearchResponse;
 import com.yelp.clientlib.entities.options.CoordinateOptions;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +40,6 @@ import java.util.Map;
 import jp.wasabeef.picasso.transformations.BlurTransformation;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -70,10 +64,10 @@ public class MainActivity extends ActionBarHandler {
     CoordinateOptions mCoordinate;
     private double mLatitude,mLongitude;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.activity_main);
+        super.onCreate(savedInstanceState);
+        super.setActionBar(R.layout.activity_main);
         jDrawer = (DrawerLayout) findViewById(R.id.drawer);
         jList = (ListView) findViewById(R.id.navItems);
         items = getResources().getStringArray(R.array.navItems);
@@ -315,6 +309,7 @@ public class MainActivity extends ActionBarHandler {
                 intent.putExtra("Restaurant", restaurants.get(2));
                 break;
         }
+
         startActivity(intent);
     }
 
@@ -442,7 +437,8 @@ public class MainActivity extends ActionBarHandler {
                     r = new RestaurantInfo(b.name(),b.url());
                     r.setName(b.name());
                     r.setRatingURL(b.ratingImgUrlLarge());
-                    r.setLocation(b.location());
+                    r.setLatitude(b.location().coordinate().latitude());
+                    r.setLongitude(b.location().coordinate().longitude());
                     r.setSnippetText(b.snippetText());
                     restaurants.add(r);
                     loadPicture(r,i);

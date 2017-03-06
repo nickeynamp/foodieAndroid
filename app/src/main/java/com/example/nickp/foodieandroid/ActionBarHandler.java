@@ -1,11 +1,8 @@
 package com.example.nickp.foodieandroid;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -16,8 +13,7 @@ import android.view.MenuItem;
 class ActionBarHandler extends AppCompatActivity {
 
 
-    protected void onCreate(Bundle savedInstanceState, int contentView) {
-        super.onCreate(savedInstanceState);
+    protected void setActionBar(int contentView) {
         setContentView(contentView);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

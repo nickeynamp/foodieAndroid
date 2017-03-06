@@ -2,17 +2,10 @@ package com.example.nickp.foodieandroid;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,9 +13,14 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import jp.wasabeef.picasso.transformations.BlurTransformation;
 
 public class Restaurant extends ActionBarHandler implements OnMapReadyCallback {
     private DatabaseReference mDatabase;
@@ -33,9 +31,12 @@ public class Restaurant extends ActionBarHandler implements OnMapReadyCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.activity_restaurant);
+        super.onCreate(savedInstanceState);
+        super.setActionBar(R.layout.activity_restaurant);
         Intent intent = getIntent();
-        RestaurantInfo restaurantInfo = (RestaurantInfo) intent.getExtras().getSerializable("Restaurant");
+        restaurantInfo = (RestaurantInfo) intent.getExtras().getSerializable("Restaurant");
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         /*restaurantInfo = new RestaurantInfo();
         restaurantInfo.setName("McDonald's");
@@ -75,14 +76,12 @@ public class Restaurant extends ActionBarHandler implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         // Add a marker in Sydney, Australia,
         // and move the map's camera to the same location.
-        LatLng position = new LatLng(restaurantInfo.getLocation().coordinate().longitude(), restaurantInfo.getLocation().coordinate().latitude());
+        Log.e("LONGITUDE", ""+restaurantInfo.getLongitude());
+        Log.e("LATITUDE", ""+restaurantInfo.getLatitude());
+        LatLng position = new LatLng(restaurantInfo.getLongitude(), restaurantInfo.getLatitude());
         googleMap.addMarker(new MarkerOptions().position(position)
                 .title("Restaurant's Position"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(position));
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
     }
 
     public void likeRestaurant(View view) {

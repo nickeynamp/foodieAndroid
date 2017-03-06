@@ -22,7 +22,8 @@ public class Like extends ActionBarHandler {
                             .build(),
                     RC_SIGN_IN);
         }
-        super.onCreate(savedInstanceState, R.layout.activity_like);
+        super.onCreate(savedInstanceState);
+        super.setActionBar(R.layout.activity_like);
     }
 
 

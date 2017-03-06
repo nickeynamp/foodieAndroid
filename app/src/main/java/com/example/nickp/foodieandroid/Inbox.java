@@ -62,7 +62,8 @@ public class Inbox extends ActionBarHandler {
                             .build(),
                     RC_SIGN_IN);
         }
-        super.onCreate(savedInstanceState, R.layout.activity_inbox);
+        super.onCreate(savedInstanceState);
+        super.setActionBar(R.layout.activity_inbox);
         final Context inboxContext = this;
         InboxListAdapter adapter = new InboxListAdapter(this, names, previews, times, images);
         inboxList = (ListView) findViewById(R.id.inboxlist);

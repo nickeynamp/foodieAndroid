@@ -1,7 +1,5 @@
 package com.example.nickp.foodieandroid;
 
-import com.yelp.clientlib.entities.Location;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,7 +15,8 @@ public class RestaurantInfo implements Serializable{
     private String picUrl;
     private String ratingURL;
     private String snippetText;
-    private Location location;
+    private double longitude;
+    private double latitude;
 
     public RestaurantInfo(){
 
@@ -82,16 +81,6 @@ public class RestaurantInfo implements Serializable{
         this.ratingURL = ratingURL;
     }
 
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-
-
     public List<String> getUserList() {
         return userList;
     }
@@ -102,4 +91,19 @@ public class RestaurantInfo implements Serializable{
 
     List<String> userList;
 
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
 }

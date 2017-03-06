@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.nickp.foodieandroid.MainActivity.query;
-
 
 public class Browse extends ActionBarHandler {
 
@@ -41,7 +39,8 @@ public class Browse extends ActionBarHandler {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.activity_browse);
+        super.onCreate(savedInstanceState);
+        super.setActionBar(R.layout.activity_browse);
         final Context browseContext = this;
         BrowseListAdapter adapter = new BrowseListAdapter(this, names, previews, stars, images);
         browseList = (ListView) findViewById(R.id.browselist);

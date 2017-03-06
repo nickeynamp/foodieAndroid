@@ -22,7 +22,8 @@ public class Message extends ActionBarHandler {
                             .build(),
                     RC_SIGN_IN);
         }
-        super.onCreate(savedInstanceState, R.layout.activity_message);
+        super.onCreate(savedInstanceState);
+        super.setActionBar(R.layout.activity_message);
     }
 
 

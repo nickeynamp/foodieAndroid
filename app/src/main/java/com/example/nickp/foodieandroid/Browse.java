@@ -36,9 +36,7 @@ public class Browse extends ActionBarHandler {
     String [] names = {};
     String[] previews = {};
     String[] stars = {};
-    String[] images = {
-            "https://s3-media1.fl.yelpcdn.com/bphoto/yG7tUZdstWgmiuEFJPBgRw/o.jpg"
-    };
+    String[] images = {};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +47,6 @@ public class Browse extends ActionBarHandler {
 
         new askYelp().execute("0");
         waitForLoading(false);
-
     }
 
     public void updateInfo(){
@@ -69,7 +66,7 @@ public class Browse extends ActionBarHandler {
 
     synchronized public void waitForLoading(boolean client) {
         if (client) {
-            if (results.size() >= 5 ) {
+            if (results.size() >= 6 ) {
                 updateInfo();
             } else {
                 waiting = true;
@@ -77,7 +74,7 @@ public class Browse extends ActionBarHandler {
         } else {
             if (waiting) {
                 waiting = false;
-                updateInfo();
+                //updateInfo();
             }
         }
     }
@@ -95,7 +92,9 @@ public class Browse extends ActionBarHandler {
         protected void onProgressUpdate(String... values){
 
             super.onProgressUpdate(values);
-            updateInfo();
+            if(images.length>=6) {
+                updateInfo();
+            }
         }
 
         @Override
@@ -104,7 +103,7 @@ public class Browse extends ActionBarHandler {
             Map<String,String> criteria = new HashMap<>();
 
             // general params
-            criteria.put("limit", "5");
+            criteria.put("limit", "6");
             criteria.put("sort", "2");
             if(getIntent().hasExtra("Category"))
               criteria.put("category_filter",getIntent().getExtras().getString("Category"));
@@ -116,7 +115,6 @@ public class Browse extends ActionBarHandler {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("EXECUTED RIGHT NOW");
             if(response!=null){
                 List<Business> businessList = response.body().businesses();
                 RestaurantInfo r;
@@ -127,9 +125,6 @@ public class Browse extends ActionBarHandler {
                     System.out.println("Names are" + Arrays.toString(names));
 //                    previews.add()
                     stars = expand(stars,b.ratingImgUrlLarge());
-//                    String properURL = ResParser.getPictureURL(r.getPicUrl());
-//                    System.out.println("Proper URL is" + properURL);
-//                    images = expand(images,properURL);
                     r.setRatingURL(b.ratingImgUrlLarge());
                     r.setLongitude(b.location().coordinate().longitude());
                     r.setLatitude(b.location().coordinate().latitude());
@@ -138,7 +133,6 @@ public class Browse extends ActionBarHandler {
                     loadPicture(r,i);
                     i++;
                 }
-                System.out.println("What inside Images are" + Arrays.toString(images));
             }
             return null;
         }
@@ -158,7 +152,6 @@ public class Browse extends ActionBarHandler {
                 @Override
                 public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
                     String picture = ResParser.getPictureURL(response.body().string());
-                    System.out.println("IS CALLED" + picture);
                     results.get(pos).setPicUrl(picture);
                     images = expand(images,picture);
                     publishProgress(picture);

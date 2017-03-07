@@ -18,8 +18,8 @@ public class ResParser {
         Document doc = Jsoup.parse(html);
         Elements images = doc.select("div.photo-box > img");
 //        int random = (int )(Math.random() * (double) + 1) % (images.size() - 1);
-        Random generator = new Random();
-        int random = generator.nextInt(images.size());
+        int random = (int )(Math.random() * images.size());
+        System.out.println("Random is" + random);
 
         String url;
         url = images.get(random).attr("src");

@@ -1,6 +1,7 @@
 package com.example.nickp.foodieandroid;
 
 import android.app.Activity;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -49,11 +51,11 @@ class BrowseListAdapter extends ArrayAdapter<String> {
                 .with(this.context)
                 .load(stars[position])
                 .into(starsImage);
-//        Picasso
-//                .with(this.context)
-//                .load(images[position])
-//                .into(imageView);
 
+        Picasso
+                .with(this.context)
+                .load(images[position])
+                .into(imageView);
         return rowView;
     }
 }
